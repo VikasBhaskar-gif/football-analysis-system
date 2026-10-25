@@ -1,147 +1,49 @@
-import React, { useState } from 'react';
-import { UploadCloud, FileVideo, Shield, Target, Calendar, CheckCircle2, AlertTriangle, Layers } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { AlertCircle, FileVideo, FolderOpen, Layers, LoaderCircle, Map, Play, Plus, SkipBack, SkipForward, SlidersHorizontal } from 'lucide-react';
 
 export default function UploadPromptView({ onUploadFile, isUploading, uploadStatus }) {
   const [isDragging, setIsDragging] = useState(false);
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    setIsDragging(false);
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      onUploadFile(e.dataTransfer.files[0]);
-    }
-  };
-
-  const handleSelect = (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      onUploadFile(e.target.files[0]);
-    }
-  };
+  const inputRef = useRef(null);
+  const dragDepth = useRef(0);
+  const chooseVideo = () => inputRef.current?.click();
 
   return (
-    <div className="upload-empty-state">
-      <div
-        className={`upload-box-hero ${isDragging ? 'drag-over' : ''}`}
-        onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
-        onDragLeave={() => setIsDragging(false)}
-        onDrop={handleDrop}
-        onClick={() => document.getElementById('main-video-upload-input').click()}
-      >
-        <input
-          id="main-video-upload-input"
-          type="file"
-          accept="video/mp4,video/webm,video/quicktime,video/x-matroska"
-          style={{ display: 'none' }}
-          onChange={handleSelect}
-        />
-
-        <div style={{
-          width: 72,
-          height: 72,
-          borderRadius: '50%',
-          background: 'rgba(0, 229, 255, 0.08)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          margin: '0 auto 20px',
-          border: '1px solid rgba(0, 229, 255, 0.35)',
-          boxShadow: '0 0 24px rgba(0, 229, 255, 0.2)',
-        }}>
-          <UploadCloud size={36} color="#00e5ff" />
+    <section className={`studio-welcome ${isDragging ? 'is-dragging' : ''}`} aria-label="Match review workspace"
+      onDragEnter={(e) => { e.preventDefault(); dragDepth.current += 1; setIsDragging(true); }}
+      onDragOver={(e) => e.preventDefault()}
+      onDragLeave={(e) => { e.preventDefault(); dragDepth.current = Math.max(0, dragDepth.current - 1); if (!dragDepth.current) setIsDragging(false); }}
+      onDrop={(e) => { e.preventDefault(); dragDepth.current = 0; setIsDragging(false); if (e.dataTransfer.files?.[0]) onUploadFile(e.dataTransfer.files[0]); }}>
+      <div className="studio-editor-grid">
+        <div className="studio-editor-main">
+          <section className="studio-viewer" aria-labelledby="viewer-title">
+            <div className="studio-panel-bar"><h2 id="viewer-title"><FileVideo size={14} />Viewer</h2><span>NO SOURCE</span></div>
+            <div className="studio-empty-canvas">
+              <span className="canvas-corner tl" /><span className="canvas-corner tr" /><span className="canvas-corner bl" /><span className="canvas-corner br" />
+              <div className="studio-import-focus">
+                <span className="studio-source-icon">{isUploading ? <LoaderCircle size={26} className="spin-icon" /> : <FolderOpen size={26} strokeWidth={1.2} />}</span>
+                <h2>{isDragging ? 'Drop to import' : isUploading ? 'Preparing video…' : 'Open a match video'}</h2>
+                <p>Drop your footage here to start a review.</p>
+                <button className="studio-primary" onClick={chooseVideo}><Plus size={15} />{isUploading ? 'Importing…' : 'Import footage'}</button>
+                <span className="studio-formats">MP4 · MOV · WEBM · MKV</span>
+              </div>
+            </div>
+            <div className="studio-empty-transport"><span className="studio-timecode">00:00:00:00</span><div><button disabled aria-label="Previous frame"><SkipBack size={14} /></button><button disabled aria-label="Play"><Play size={16} /></button><button disabled aria-label="Next frame"><SkipForward size={14} /></button></div><span className="studio-transport-meta">— fps</span></div>
+          </section>
+          <section className="studio-timeline" aria-labelledby="timeline-title">
+            <div className="studio-panel-bar"><h2 id="timeline-title"><Layers size={14} />Timeline</h2><span>SEQUENCE 01</span></div>
+            <div className="studio-empty-ruler"><span>00:00</span></div>
+            <div className="studio-empty-track"><span className="studio-track-label">V1</span><div><span>No clips in sequence</span><button onClick={chooseVideo}>Import video <Plus size={12} /></button></div></div>
+          </section>
+          {uploadStatus && <div className={`studio-upload-status ${uploadStatus.type}`} role={uploadStatus.type === 'error' ? 'alert' : 'status'}><AlertCircle size={16} /><span>{uploadStatus.message}</span></div>}
         </div>
-
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8, letterSpacing: '-0.3px' }}>
-          {isUploading ? 'Loading and Probing Video...' : 'Upload Football Match Video'}
-        </h2>
-        
-        <p style={{ color: 'var(--text-secondary)', fontSize: 13, maxWidth: 480, margin: '0 auto 24px', lineHeight: 1.6 }}>
-          Drag and drop your local match video file here, or click to browse.
-          Supports MP4, WebM, and MOV formats.
-        </p>
-
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <button 
-            type="button" 
-            className="btn btn-primary" 
-            style={{ padding: '10px 24px', fontSize: 13 }}
-            onClick={(e) => {
-              e.stopPropagation();
-              document.getElementById('main-video-upload-input').click();
-            }}
-          >
-            <FileVideo size={16} />
-            <span>Select Local Video File</span>
-          </button>
-        </div>
-
-        {uploadStatus && (
-          <div style={{
-            marginTop: 20,
-            padding: '10px 16px',
-            borderRadius: 'var(--radius-md)',
-            fontSize: 12,
-            backgroundColor: uploadStatus.type === 'error' ? 'rgba(239, 68, 68, 0.15)' : 'rgba(0, 229, 255, 0.1)',
-            border: `1px solid ${uploadStatus.type === 'error' ? 'var(--accent-red)' : 'var(--accent-cyan)'}`,
-            color: uploadStatus.type === 'error' ? 'var(--accent-red)' : 'var(--accent-cyan)',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 8
-          }}>
-            {uploadStatus.type === 'error' ? <AlertTriangle size={15} /> : <CheckCircle2 size={15} />}
-            <span>{uploadStatus.message}</span>
+        <aside className="studio-inspector" aria-labelledby="inspector-title">
+          <div className="studio-panel-bar"><h2 id="inspector-title"><SlidersHorizontal size={14} />Inspector</h2><span>SOURCE</span></div>
+          <div className="studio-inspector-body"><h3>Source details</h3><dl><div><dt>File</dt><dd>—</dd></div><div><dt>Resolution</dt><dd>—</dd></div><div><dt>Frame rate</dt><dd>—</dd></div><div><dt>Duration</dt><dd>—</dd></div></dl>
+            <div className="studio-tracking-note"><Map size={18} strokeWidth={1.3} /><h3>Built around the match.</h3><p>Import a video for playback and frame review. Link tracking data to explore players, team shape and passing lanes.</p><span>No sample matches included</span></div>
           </div>
-        )}
+        </aside>
       </div>
-
-      {/* Feature capabilities grid below upload box */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
-        gap: 16,
-        maxWidth: 720,
-        width: '100%',
-        marginTop: 32,
-      }}>
-        <div className="card" style={{ padding: '14px 16px', textAlign: 'left' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--accent-cyan)', fontSize: 13, fontWeight: 700, marginBottom: 4 }}>
-            <FileVideo size={15} />
-            <span>Local Playback</span>
-          </div>
-          <div style={{ fontSize: 11, color: 'var(--text-secondary)', lineHeight: 1.4 }}>
-            Direct browser playback with draggable timeline scrubber and frame stepping.
-          </div>
-        </div>
-
-        <div className="card" style={{ padding: '14px 16px', textAlign: 'left' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--accent-green)', fontSize: 13, fontWeight: 700, marginBottom: 4 }}>
-            <Shield size={15} />
-            <span>Possession Dynamics</span>
-          </div>
-          <div style={{ fontSize: 11, color: 'var(--text-secondary)', lineHeight: 1.4 }}>
-            Identifies controlled carries, pressure tiers, and defensive tackles.
-          </div>
-        </div>
-
-        <div className="card" style={{ padding: '14px 16px', textAlign: 'left' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--accent-amber)', fontSize: 13, fontWeight: 700, marginBottom: 4 }}>
-            <Target size={15} />
-            <span>Tactical Options</span>
-          </div>
-          <div style={{ fontSize: 11, color: 'var(--text-secondary)', lineHeight: 1.4 }}>
-            Evaluates forward progression, overlaps, wing switches, and direct shots on goal.
-          </div>
-        </div>
-
-        <div className="card" style={{ padding: '14px 16px', textAlign: 'left' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--accent-purple)', fontSize: 13, fontWeight: 700, marginBottom: 4 }}>
-            <Calendar size={15} />
-            <span>Chronological Events</span>
-          </div>
-          <div style={{ fontSize: 11, color: 'var(--text-secondary)', lineHeight: 1.4 }}>
-            Synthesizes passes, turnovers, and carries into an interactive timeline.
-          </div>
-        </div>
-      </div>
-    </div>
+      <input ref={inputRef} id="main-video-upload-input" type="file" hidden accept=".mp4,.webm,.mov,.mkv" aria-label="Choose match video" onChange={(e) => e.target.files?.[0] && onUploadFile(e.target.files[0])} />
+    </section>
   );
 }

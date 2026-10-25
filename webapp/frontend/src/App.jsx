@@ -6,14 +6,7 @@ import ContextualAnalysisPanel from './components/ContextualAnalysisPanel';
 import CoachAILabSection from './components/CoachAILabSection';
 import UploadPromptView from './components/UploadPromptView';
 import ErrorBoundary from './components/ErrorBoundary';
-import { 
-  Layers,
-  Compass,
-  PlaySquare,
-  Sparkles,
-  ChevronDown,
-  UploadCloud
-} from 'lucide-react';
+import { ChevronDown, FileVideo, Layers, LayoutGrid, Map, MessageSquare, Plus } from 'lucide-react';
 
 export default function App() {
   const [catalog, setCatalog] = useState([]);
@@ -462,123 +455,68 @@ export default function App() {
 
   return (
     <div className="app-container">
-      {/* Top Application Bar (Ultra-Modern Dark Pro Header) */}
-      <header className="topbar">
-        {/* Left: Brand & Logo */}
-        <div className="topbar-left">
-          <div className="brand-row">
-            <div className="brand-icon">
-              <span className="brand-crest-symbol">⚽</span>
-            </div>
-            <div className="brand-text">
-              <div className="brand-title-line">
-                <h1>TACTICAL PREDICTOR</h1>
-                <span className="brand-pro-badge">PRO OS</span>
+      <aside className="desk-rail" aria-label="Workspace navigation">
+        <a className="desk-brand" href="/" aria-label="Tactical Predictor home">
+          <span className="desk-mark" aria-hidden="true"><span /><span /><span /></span>
+
+        </a>
+
+        <nav className="desk-nav" aria-label="Match tools">
+          <button className="desk-nav-item is-current" aria-label="Overview" title="Overview" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <LayoutGrid size={17} strokeWidth={1.6} /><span>Overview</span><span className="nav-current-dot" />
+          </button>
+          {[
+            { id: 'video-section', label: 'Video review', icon: FileVideo },
+            { id: 'pitch-section', label: 'Tactical pitch', icon: Map },
+            { id: 'analysis-section', label: 'Analysis', icon: Layers },
+            { id: 'coach-ai-lab-section', label: 'Coach analyst', icon: MessageSquare },
+          ].map(({ id, label, icon: Icon }) => (
+            <button key={id} className="desk-nav-item" aria-label={label}
+              title={label}
+              onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })}>
+              <Icon size={17} strokeWidth={1.6} /><span>{label}</span>
+            </button>
+          ))}
+        </nav>
+        <span className="studio-rail-end" title="Local workspace" aria-label="Local workspace">L</span>
+      </aside>
+
+      <div className="desk-shell">
+        <header className="topbar desk-topbar">
+          <div className="studio-wordmark">TACTICAL<span>Match analysis</span></div>
+          <div className="studio-source-name">{activeVideo ? activeVideo.title : 'Untitled session'}</div>
+          <button className="desk-import-button" onClick={() => document.getElementById('header-upload-input').click()}>
+            <Plus size={16} /><span>{isUploading ? 'Importing…' : 'Import video'}</span>
+          </button>
+          <input id="header-upload-input" type="file" accept=".mp4,.webm,.mov,.mkv" hidden
+            aria-label="Import match video" onChange={(e) => e.target.files?.[0] && handleUploadFile(e.target.files[0])} />
+        </header>
+
+        <main className={`main-content desk-content ${activeVideo ? 'has-match' : ''}`}>
+          <div className="desk-match-heading">
+              <div className="desk-match-title">
+                <span className="desk-eyebrow">MATCH REVIEW</span>
+                <h1>{activeVideo?.title || activeVideo?.original_filename || 'Match review'}</h1>
+                {activeVideo && <span className="desk-match-meta">{activeVideo.has_tracking ? 'Tracking linked' : 'Video source loaded'}</span>}
               </div>
-              <span className="brand-subtitle">AI SPATIAL INTELLIGENCE</span>
-            </div>
+              <div className="desk-match-controls">
+                <div className="desk-match-select">
+                  <select aria-label="Select match" value={activeVideo?.id || ''}
+                    onChange={(e) => { const match = catalog.find((m) => m.id === e.target.value); if (match) selectMatch(match); }}>
+                    {!activeVideo && <option value="">Select match</option>}
+                    {activeVideo && !catalog.some((m) => m.id === activeVideo.id) && <option value={activeVideo.id}>{activeVideo.title}</option>}
+                    {catalog.map((m) => <option key={m.id} value={m.id}>{m.title || m.original_filename}</option>)}
+                  </select>
+                  <ChevronDown size={14} aria-hidden="true" />
+                </div>
+                <div className="desk-periods" aria-label="Match period">
+                  { [['1st', '1st half'], ['2nd', '2nd half'], ['full', 'Full match']].map(([period, label]) => (
+                    <button key={period} aria-pressed={activePeriod === period} className={activePeriod === period ? 'selected' : ''}
+                      onClick={() => handlePeriodChange(period)}>{label}</button>
+                  )) }
+                </div>
+              </div>
           </div>
-        </div>
-
-        {/* Center: Match Selector & Half Switcher (Always properly spaced, zero overlap) */}
-        <div className="topbar-center">
-          <div className="match-selector-dropdown-wrapper">
-            <span className="match-live-dot" />
-            <select
-              className="match-select-dropdown"
-              value={activeVideo?.id || ''}
-              onChange={(e) => {
-                const target = catalog.find((m) => m.id === e.target.value);
-                if (target) selectMatch(target);
-              }}
-            >
-              {catalog.map((m) => (
-                <option key={m.id} value={m.id}>
-                  {m.title || m.original_filename} • {m.competition || 'UCL'}
-                </option>
-              ))}
-            </select>
-            <ChevronDown size={14} className="dropdown-caret" />
-          </div>
-
-          <div className="period-tabs-group">
-            <button
-              type="button"
-              className={`period-tab-btn ${activePeriod === '1st' ? 'active' : ''}`}
-              onClick={() => handlePeriodChange('1st')}
-            >
-              1st Half
-            </button>
-            <button
-              type="button"
-              className={`period-tab-btn ${activePeriod === '2nd' ? 'active' : ''}`}
-              onClick={() => handlePeriodChange('2nd')}
-            >
-              2nd Half
-            </button>
-            <button
-              type="button"
-              className={`period-tab-btn ${activePeriod === 'full' ? 'active' : ''}`}
-              onClick={() => handlePeriodChange('full')}
-            >
-              Full 90m
-            </button>
-          </div>
-        </div>
-
-        {/* Right: Quick Jump Links & Upload */}
-        <div className="topbar-right">
-          <div className="layout-toggle-group">
-            <button
-              className="layout-btn"
-              onClick={() => document.getElementById('video-section')?.scrollIntoView({ behavior: 'smooth' })}
-              title="Jump to Broadcast Video Viewport"
-            >
-              <PlaySquare size={13} />
-              <span>Video</span>
-            </button>
-            <button
-              className="layout-btn"
-              onClick={() => document.getElementById('pitch-section')?.scrollIntoView({ behavior: 'smooth' })}
-              title="Jump to 2D Tactical Pitch"
-            >
-              <Compass size={13} />
-              <span>2D Pitch</span>
-            </button>
-            <button
-              className="layout-btn"
-              onClick={() => document.getElementById('analysis-section')?.scrollIntoView({ behavior: 'smooth' })}
-              title="Jump to Tactical Analysis & Lanes"
-            >
-              <Layers size={13} color="#00f0ff" />
-              <span>Lanes & Analysis</span>
-            </button>
-            <button
-              className="layout-btn ai-lab-nav-btn"
-              onClick={() => document.getElementById('coach-ai-lab-section')?.scrollIntoView({ behavior: 'smooth' })}
-              title="Jump to Dedicated Coach AI Analyst"
-            >
-              <Sparkles size={13} color="#10b981" />
-              <span>Coach AI</span>
-            </button>
-          </div>
-
-          <label className="btn btn-primary quick-upload-btn" title="Upload new match or tactical clip">
-            <UploadCloud size={14} />
-            <span>Upload Clip</span>
-            <input
-              type="file"
-              accept=".mp4,.webm,.mov,.mkv"
-              onChange={(e) => e.target.files?.[0] && handleUploadFile(e.target.files[0])}
-              style={{ display: 'none' }}
-              id="header-upload-input"
-            />
-          </label>
-        </div>
-      </header>
-
-      {/* Main Workspace Body */}
-      <main className="main-content">
         {!activeVideo ? (
           <UploadPromptView
             onUploadFile={handleUploadFile}
@@ -689,7 +627,9 @@ export default function App() {
             </ErrorBoundary>
           </div>
         )}
-      </main>
+        </main>
+        <footer className="desk-footer"><span><i />Local workspace</span><span>{activeVideo ? 'Source loaded' : 'No source loaded'}</span></footer>
+      </div>
     </div>
   );
 }

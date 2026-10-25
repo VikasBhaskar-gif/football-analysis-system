@@ -1,0 +1,3 @@
+# Tactical Studio
+
+The user rejected the analyst desk design and asked for another. Replacement: a compact charcoal editing suite with a slim navigation rail, muted orange controls, a video viewer, timeline and source inspector. No editorial serif headings, workflow marketing panels, glow or gradients. Existing upload and playback functions remain in place. User correction: preserve every original panel, control, report, processing handler and enablement rule. Do not gate or hide tools based on tracking availability. Changes are visual only. Verify by production build, browser viewport overflow inspection and loaded-video playback.
