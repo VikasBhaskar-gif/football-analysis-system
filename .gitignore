@@ -1,0 +1,88 @@
+# ==============================================================================
+# Football Tactical Predictor / Analysis System - .gitignore
+# ==============================================================================
+
+# Environment variables & secrets (API keys)
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Python virtual environments & packages
+venv/
+football-ai/venv/
+env/
+ENV/
+.venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+
+# Node.js & Frontend dependencies
+node_modules/
+webapp/frontend/node_modules/
+.npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+.vite/
+
+# Frontend build output (can be rebuilt with `npm run build`)
+webapp/frontend/dist/
+
+# Large datasets, videos & binary files (> 100MB / GitHub limits)
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.h5
+*.hdf5
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.rar
+
+# Dataset directories
+football-ai/FOOTPASS/
+outputs/uploads/
+
+# IDE / Editor configuration
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

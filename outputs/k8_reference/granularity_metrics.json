@@ -1,0 +1,693 @@
+{
+  "k_comparison": [
+    {
+      "k": 4,
+      "inertia": 128454.0,
+      "silhouette": 0.2065,
+      "cluster_sizes": [
+        925,
+        636,
+        747,
+        2492
+      ],
+      "clusters": [
+        {
+          "cluster_id": 0,
+          "n_samples": 925,
+          "pct": 19.27,
+          "n_matches": 4,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_49",
+            "game_51"
+          ],
+          "n_halves": 6,
+          "halves": [
+            "game_27_H1",
+            "game_27_H2",
+            "game_39_H1",
+            "game_39_H2",
+            "game_49_H1",
+            "game_51_H2"
+          ],
+          "h1_count": 499,
+          "h2_count": 426,
+          "n_temporal_runs": 11,
+          "mean_run_length": 84.1,
+          "max_run_length": 169,
+          "rep_global_idx": 1857,
+          "rep_dist": 2.8418
+        },
+        {
+          "cluster_id": 1,
+          "n_samples": 636,
+          "pct": 13.25,
+          "n_matches": 3,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_51"
+          ],
+          "n_halves": 3,
+          "halves": [
+            "game_27_H2",
+            "game_39_H2",
+            "game_51_H2"
+          ],
+          "h1_count": 0,
+          "h2_count": 636,
+          "n_temporal_runs": 5,
+          "mean_run_length": 127.2,
+          "max_run_length": 378,
+          "rep_global_idx": 869,
+          "rep_dist": 2.4823
+        },
+        {
+          "cluster_id": 2,
+          "n_samples": 747,
+          "pct": 15.56,
+          "n_matches": 3,
+          "matches": [
+            "game_39",
+            "game_49",
+            "game_51"
+          ],
+          "n_halves": 5,
+          "halves": [
+            "game_39_H1",
+            "game_39_H2",
+            "game_49_H1",
+            "game_49_H2",
+            "game_51_H1"
+          ],
+          "h1_count": 460,
+          "h2_count": 287,
+          "n_temporal_runs": 11,
+          "mean_run_length": 67.9,
+          "max_run_length": 225,
+          "rep_global_idx": 2091,
+          "rep_dist": 3.19
+        },
+        {
+          "cluster_id": 3,
+          "n_samples": 2492,
+          "pct": 51.92,
+          "n_matches": 4,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_49",
+            "game_51"
+          ],
+          "n_halves": 8,
+          "halves": [
+            "game_27_H1",
+            "game_27_H2",
+            "game_39_H1",
+            "game_39_H2",
+            "game_49_H1",
+            "game_49_H2",
+            "game_51_H1",
+            "game_51_H2"
+          ],
+          "h1_count": 1441,
+          "h2_count": 1051,
+          "n_temporal_runs": 24,
+          "mean_run_length": 103.8,
+          "max_run_length": 386,
+          "rep_global_idx": 219,
+          "rep_dist": 2.5527
+        }
+      ]
+    },
+    {
+      "k": 8,
+      "inertia": 100170.6,
+      "silhouette": 0.1828,
+      "cluster_sizes": [
+        206,
+        719,
+        524,
+        604,
+        1080,
+        776,
+        515,
+        376
+      ],
+      "clusters": [
+        {
+          "cluster_id": 0,
+          "n_samples": 206,
+          "pct": 4.29,
+          "n_matches": 3,
+          "matches": [
+            "game_39",
+            "game_49",
+            "game_51"
+          ],
+          "n_halves": 3,
+          "halves": [
+            "game_39_H1",
+            "game_49_H2",
+            "game_51_H1"
+          ],
+          "h1_count": 59,
+          "h2_count": 147,
+          "n_temporal_runs": 3,
+          "mean_run_length": 68.7,
+          "max_run_length": 147,
+          "rep_global_idx": 3220,
+          "rep_dist": 1.7855
+        },
+        {
+          "cluster_id": 1,
+          "n_samples": 719,
+          "pct": 14.98,
+          "n_matches": 4,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_49",
+            "game_51"
+          ],
+          "n_halves": 8,
+          "halves": [
+            "game_27_H1",
+            "game_27_H2",
+            "game_39_H1",
+            "game_39_H2",
+            "game_49_H1",
+            "game_49_H2",
+            "game_51_H1",
+            "game_51_H2"
+          ],
+          "h1_count": 446,
+          "h2_count": 273,
+          "n_temporal_runs": 19,
+          "mean_run_length": 37.8,
+          "max_run_length": 174,
+          "rep_global_idx": 2548,
+          "rep_dist": 2.0254
+        },
+        {
+          "cluster_id": 2,
+          "n_samples": 524,
+          "pct": 10.92,
+          "n_matches": 4,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_49",
+            "game_51"
+          ],
+          "n_halves": 8,
+          "halves": [
+            "game_27_H1",
+            "game_27_H2",
+            "game_39_H1",
+            "game_39_H2",
+            "game_49_H1",
+            "game_49_H2",
+            "game_51_H1",
+            "game_51_H2"
+          ],
+          "h1_count": 389,
+          "h2_count": 135,
+          "n_temporal_runs": 14,
+          "mean_run_length": 37.4,
+          "max_run_length": 107,
+          "rep_global_idx": 2836,
+          "rep_dist": 2.3968
+        },
+        {
+          "cluster_id": 3,
+          "n_samples": 604,
+          "pct": 12.58,
+          "n_matches": 3,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_51"
+          ],
+          "n_halves": 3,
+          "halves": [
+            "game_27_H2",
+            "game_39_H2",
+            "game_51_H2"
+          ],
+          "h1_count": 0,
+          "h2_count": 604,
+          "n_temporal_runs": 5,
+          "mean_run_length": 120.8,
+          "max_run_length": 368,
+          "rep_global_idx": 881,
+          "rep_dist": 2.472
+        },
+        {
+          "cluster_id": 4,
+          "n_samples": 1080,
+          "pct": 22.5,
+          "n_matches": 4,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_49",
+            "game_51"
+          ],
+          "n_halves": 7,
+          "halves": [
+            "game_27_H1",
+            "game_27_H2",
+            "game_39_H2",
+            "game_49_H1",
+            "game_49_H2",
+            "game_51_H1",
+            "game_51_H2"
+          ],
+          "h1_count": 527,
+          "h2_count": 553,
+          "n_temporal_runs": 20,
+          "mean_run_length": 54.0,
+          "max_run_length": 177,
+          "rep_global_idx": 581,
+          "rep_dist": 2.2647
+        },
+        {
+          "cluster_id": 5,
+          "n_samples": 776,
+          "pct": 16.17,
+          "n_matches": 3,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_51"
+          ],
+          "n_halves": 5,
+          "halves": [
+            "game_27_H1",
+            "game_27_H2",
+            "game_39_H1",
+            "game_39_H2",
+            "game_51_H2"
+          ],
+          "h1_count": 357,
+          "h2_count": 419,
+          "n_temporal_runs": 11,
+          "mean_run_length": 70.5,
+          "max_run_length": 161,
+          "rep_global_idx": 800,
+          "rep_dist": 3.0989
+        },
+        {
+          "cluster_id": 6,
+          "n_samples": 515,
+          "pct": 10.73,
+          "n_matches": 4,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_49",
+            "game_51"
+          ],
+          "n_halves": 7,
+          "halves": [
+            "game_27_H2",
+            "game_39_H1",
+            "game_39_H2",
+            "game_49_H1",
+            "game_49_H2",
+            "game_51_H1",
+            "game_51_H2"
+          ],
+          "h1_count": 368,
+          "h2_count": 147,
+          "n_temporal_runs": 16,
+          "mean_run_length": 32.2,
+          "max_run_length": 124,
+          "rep_global_idx": 1406,
+          "rep_dist": 2.8439
+        },
+        {
+          "cluster_id": 7,
+          "n_samples": 376,
+          "pct": 7.83,
+          "n_matches": 4,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_49",
+            "game_51"
+          ],
+          "n_halves": 4,
+          "halves": [
+            "game_27_H1",
+            "game_39_H2",
+            "game_49_H2",
+            "game_51_H1"
+          ],
+          "h1_count": 254,
+          "h2_count": 122,
+          "n_temporal_runs": 6,
+          "mean_run_length": 62.7,
+          "max_run_length": 121,
+          "rep_global_idx": 3997,
+          "rep_dist": 2.148
+        }
+      ]
+    },
+    {
+      "k": 12,
+      "inertia": 85010.0,
+      "silhouette": 0.1862,
+      "cluster_sizes": [
+        455,
+        407,
+        334,
+        192,
+        411,
+        309,
+        513,
+        378,
+        505,
+        245,
+        698,
+        353
+      ],
+      "clusters": [
+        {
+          "cluster_id": 0,
+          "n_samples": 455,
+          "pct": 9.48,
+          "n_matches": 4,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_49",
+            "game_51"
+          ],
+          "n_halves": 6,
+          "halves": [
+            "game_27_H1",
+            "game_39_H2",
+            "game_49_H1",
+            "game_49_H2",
+            "game_51_H1",
+            "game_51_H2"
+          ],
+          "h1_count": 160,
+          "h2_count": 295,
+          "n_temporal_runs": 21,
+          "mean_run_length": 21.7,
+          "max_run_length": 117,
+          "rep_global_idx": 2236,
+          "rep_dist": 2.4153
+        },
+        {
+          "cluster_id": 1,
+          "n_samples": 407,
+          "pct": 8.48,
+          "n_matches": 3,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_51"
+          ],
+          "n_halves": 5,
+          "halves": [
+            "game_27_H1",
+            "game_27_H2",
+            "game_39_H1",
+            "game_39_H2",
+            "game_51_H2"
+          ],
+          "h1_count": 222,
+          "h2_count": 185,
+          "n_temporal_runs": 9,
+          "mean_run_length": 45.2,
+          "max_run_length": 162,
+          "rep_global_idx": 4668,
+          "rep_dist": 2.8657
+        },
+        {
+          "cluster_id": 2,
+          "n_samples": 334,
+          "pct": 6.96,
+          "n_matches": 1,
+          "matches": [
+            "game_27"
+          ],
+          "n_halves": 1,
+          "halves": [
+            "game_27_H2"
+          ],
+          "h1_count": 0,
+          "h2_count": 334,
+          "n_temporal_runs": 1,
+          "mean_run_length": 334.0,
+          "max_run_length": 334,
+          "rep_global_idx": 1165,
+          "rep_dist": 1.463
+        },
+        {
+          "cluster_id": 3,
+          "n_samples": 192,
+          "pct": 4.0,
+          "n_matches": 2,
+          "matches": [
+            "game_49",
+            "game_51"
+          ],
+          "n_halves": 2,
+          "halves": [
+            "game_49_H2",
+            "game_51_H1"
+          ],
+          "h1_count": 47,
+          "h2_count": 145,
+          "n_temporal_runs": 2,
+          "mean_run_length": 96.0,
+          "max_run_length": 145,
+          "rep_global_idx": 3220,
+          "rep_dist": 1.5989
+        },
+        {
+          "cluster_id": 4,
+          "n_samples": 411,
+          "pct": 8.56,
+          "n_matches": 4,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_49",
+            "game_51"
+          ],
+          "n_halves": 6,
+          "halves": [
+            "game_27_H1",
+            "game_27_H2",
+            "game_39_H1",
+            "game_39_H2",
+            "game_49_H1",
+            "game_51_H1"
+          ],
+          "h1_count": 331,
+          "h2_count": 80,
+          "n_temporal_runs": 9,
+          "mean_run_length": 45.7,
+          "max_run_length": 92,
+          "rep_global_idx": 2836,
+          "rep_dist": 2.4205
+        },
+        {
+          "cluster_id": 5,
+          "n_samples": 309,
+          "pct": 6.44,
+          "n_matches": 4,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_49",
+            "game_51"
+          ],
+          "n_halves": 6,
+          "halves": [
+            "game_27_H1",
+            "game_27_H2",
+            "game_39_H1",
+            "game_39_H2",
+            "game_49_H1",
+            "game_51_H2"
+          ],
+          "h1_count": 130,
+          "h2_count": 179,
+          "n_temporal_runs": 16,
+          "mean_run_length": 19.3,
+          "max_run_length": 45,
+          "rep_global_idx": 1827,
+          "rep_dist": 2.3746
+        },
+        {
+          "cluster_id": 6,
+          "n_samples": 513,
+          "pct": 10.69,
+          "n_matches": 4,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_49",
+            "game_51"
+          ],
+          "n_halves": 7,
+          "halves": [
+            "game_27_H1",
+            "game_27_H2",
+            "game_39_H1",
+            "game_39_H2",
+            "game_49_H1",
+            "game_49_H2",
+            "game_51_H2"
+          ],
+          "h1_count": 348,
+          "h2_count": 165,
+          "n_temporal_runs": 14,
+          "mean_run_length": 36.6,
+          "max_run_length": 181,
+          "rep_global_idx": 2548,
+          "rep_dist": 2.1366
+        },
+        {
+          "cluster_id": 7,
+          "n_samples": 378,
+          "pct": 7.88,
+          "n_matches": 4,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_49",
+            "game_51"
+          ],
+          "n_halves": 4,
+          "halves": [
+            "game_27_H1",
+            "game_39_H2",
+            "game_49_H2",
+            "game_51_H1"
+          ],
+          "h1_count": 261,
+          "h2_count": 117,
+          "n_temporal_runs": 6,
+          "mean_run_length": 63.0,
+          "max_run_length": 121,
+          "rep_global_idx": 3997,
+          "rep_dist": 2.1415
+        },
+        {
+          "cluster_id": 8,
+          "n_samples": 505,
+          "pct": 10.52,
+          "n_matches": 4,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_49",
+            "game_51"
+          ],
+          "n_halves": 6,
+          "halves": [
+            "game_27_H2",
+            "game_39_H1",
+            "game_39_H2",
+            "game_49_H1",
+            "game_49_H2",
+            "game_51_H1"
+          ],
+          "h1_count": 362,
+          "h2_count": 143,
+          "n_temporal_runs": 10,
+          "mean_run_length": 50.5,
+          "max_run_length": 214,
+          "rep_global_idx": 1406,
+          "rep_dist": 2.8294
+        },
+        {
+          "cluster_id": 9,
+          "n_samples": 245,
+          "pct": 5.1,
+          "n_matches": 2,
+          "matches": [
+            "game_27",
+            "game_39"
+          ],
+          "n_halves": 4,
+          "halves": [
+            "game_27_H1",
+            "game_27_H2",
+            "game_39_H1",
+            "game_39_H2"
+          ],
+          "h1_count": 139,
+          "h2_count": 106,
+          "n_temporal_runs": 4,
+          "mean_run_length": 61.2,
+          "max_run_length": 101,
+          "rep_global_idx": 1944,
+          "rep_dist": 1.9452
+        },
+        {
+          "cluster_id": 10,
+          "n_samples": 698,
+          "pct": 14.54,
+          "n_matches": 4,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_49",
+            "game_51"
+          ],
+          "n_halves": 7,
+          "halves": [
+            "game_27_H1",
+            "game_27_H2",
+            "game_39_H2",
+            "game_49_H1",
+            "game_49_H2",
+            "game_51_H1",
+            "game_51_H2"
+          ],
+          "h1_count": 400,
+          "h2_count": 298,
+          "n_temporal_runs": 22,
+          "mean_run_length": 31.7,
+          "max_run_length": 120,
+          "rep_global_idx": 581,
+          "rep_dist": 2.1966
+        },
+        {
+          "cluster_id": 11,
+          "n_samples": 353,
+          "pct": 7.35,
+          "n_matches": 3,
+          "matches": [
+            "game_27",
+            "game_39",
+            "game_51"
+          ],
+          "n_halves": 3,
+          "halves": [
+            "game_27_H2",
+            "game_39_H2",
+            "game_51_H2"
+          ],
+          "h1_count": 0,
+          "h2_count": 353,
+          "n_temporal_runs": 7,
+          "mean_run_length": 50.4,
+          "max_run_length": 91,
+          "rep_global_idx": 4738,
+          "rep_dist": 2.72
+        }
+      ]
+    }
+  ]
+}

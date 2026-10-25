@@ -1,0 +1,973 @@
+{
+  "generated_at": "2026-10-24 11:05:17",
+  "matches_analyzed": [
+    "game_27",
+    "game_39",
+    "game_49",
+    "game_51"
+  ],
+  "shape_categories_ontology": {
+    "high_press_front_aggression": {
+      "title": "High Pressing Block (Aggressive Frontline)",
+      "description": "Defensive line pushed high into midfield; attacking line aggressively pressing opponent build-up."
+    },
+    "compact_mid_block": {
+      "title": "Compact Mid-Block (Dual-Bank Synchronized)",
+      "description": "Balanced defensive line holding middle third with tight vertical separation to midfield (<14m)."
+    },
+    "deep_low_block": {
+      "title": "Deep Low-Block (Penalty Box Defense)",
+      "description": "Deep backline sitting close to penalty area (<28m from goal); congested central box."
+    },
+    "positional_possession_expansion": {
+      "title": "Positional Possession Expansion (Wide Build-Up)",
+      "description": "Wide, stretched team structure with inverted fullbacks and touchline wingers stretching play."
+    },
+    "counter_attack_rest_defense": {
+      "title": "Counter-Attack Rest Defense (Divided Transition)",
+      "description": "Divided structure with frontline breaking into space while rest-defense unit remains behind ball."
+    },
+    "asymmetric_flank_overload": {
+      "title": "Asymmetric Flank Overload (Wide Diamond)",
+      "description": "Heavy numerical shift towards one flank, creating a wide diamond to isolate the opposite winger."
+    }
+  },
+  "matches": {
+    "game_27": {
+      "match_id": "game_27",
+      "match_name": "Bayern Munich vs Manchester United",
+      "competition": "UEFA Champions League (Group Stage)",
+      "date": "2023-09-20",
+      "teams": {
+        "0": {
+          "code": "BAY",
+          "name": "Bayern Munich"
+        },
+        "1": {
+          "code": "MUN",
+          "name": "Manchester United"
+        }
+      },
+      "halves": {
+        "H1": {
+          "0": {
+            "sample_count": 1727,
+            "dominant_shape_category": "high_press_front_aggression",
+            "dominant_shape_title": "High Pressing Block (Aggressive Frontline)",
+            "shape_distribution_pct": {
+              "compact_mid_block": 21.5,
+              "high_press_front_aggression": 40.6,
+              "asymmetric_flank_overload": 6.1,
+              "positional_possession_expansion": 2.0,
+              "deep_low_block": 29.2,
+              "counter_attack_rest_defense": 0.7
+            },
+            "defensive_line": {
+              "avg_height_from_own_goal_m": 40.9,
+              "min_height_m": 3.5,
+              "max_height_m": 94.0,
+              "std_height_m": 18.7,
+              "avg_backline_width_m": 38.0
+            },
+            "midfield_unit": {
+              "avg_unit_width_m": 13.9,
+              "avg_separation_to_backline_m": 10.1
+            },
+            "attacking_unit": {
+              "avg_frontline_width_m": 33.7,
+              "avg_separation_to_midfield_m": 8.0
+            },
+            "team_metrics": {
+              "avg_length_m": 30.1,
+              "avg_width_m": 42.9,
+              "avg_compactness_radius_m": 15.7,
+              "total_block_depth_m": 18.2
+            },
+            "tactical_assessment": "Operates predominantly in a High Pressing Block (Aggressive Frontline) (40.6% of phases). Backline anchors at an average of 40.9m from own goal, maintaining a tight 10.1m separation to the midfield unit and an overall vertical block depth of 18.2m."
+          },
+          "1": {
+            "sample_count": 1727,
+            "dominant_shape_category": "high_press_front_aggression",
+            "dominant_shape_title": "High Pressing Block (Aggressive Frontline)",
+            "shape_distribution_pct": {
+              "compact_mid_block": 23.9,
+              "deep_low_block": 25.0,
+              "asymmetric_flank_overload": 7.2,
+              "high_press_front_aggression": 43.1,
+              "counter_attack_rest_defense": 0.5,
+              "positional_possession_expansion": 0.3
+            },
+            "defensive_line": {
+              "avg_height_from_own_goal_m": 42.4,
+              "min_height_m": 3.4,
+              "max_height_m": 88.2,
+              "std_height_m": 19.0,
+              "avg_backline_width_m": 34.1
+            },
+            "midfield_unit": {
+              "avg_unit_width_m": 15.5,
+              "avg_separation_to_backline_m": 10.1
+            },
+            "attacking_unit": {
+              "avg_frontline_width_m": 36.4,
+              "avg_separation_to_midfield_m": 8.0
+            },
+            "team_metrics": {
+              "avg_length_m": 29.7,
+              "avg_width_m": 42.6,
+              "avg_compactness_radius_m": 15.3,
+              "total_block_depth_m": 18.1
+            },
+            "tactical_assessment": "Operates predominantly in a High Pressing Block (Aggressive Frontline) (43.1% of phases). Backline anchors at an average of 42.4m from own goal, maintaining a tight 10.1m separation to the midfield unit and an overall vertical block depth of 18.1m."
+          }
+        },
+        "H2": {
+          "0": {
+            "sample_count": 1894,
+            "dominant_shape_category": "high_press_front_aggression",
+            "dominant_shape_title": "High Pressing Block (Aggressive Frontline)",
+            "shape_distribution_pct": {
+              "compact_mid_block": 17.8,
+              "high_press_front_aggression": 40.9,
+              "asymmetric_flank_overload": 10.9,
+              "deep_low_block": 26.8,
+              "counter_attack_rest_defense": 2.6,
+              "positional_possession_expansion": 1.1
+            },
+            "defensive_line": {
+              "avg_height_from_own_goal_m": 45.2,
+              "min_height_m": 5.7,
+              "max_height_m": 92.4,
+              "std_height_m": 22.0,
+              "avg_backline_width_m": 34.8
+            },
+            "midfield_unit": {
+              "avg_unit_width_m": 13.7,
+              "avg_separation_to_backline_m": 10.4
+            },
+            "attacking_unit": {
+              "avg_frontline_width_m": 29.5,
+              "avg_separation_to_midfield_m": 9.0
+            },
+            "team_metrics": {
+              "avg_length_m": 32.2,
+              "avg_width_m": 39.6,
+              "avg_compactness_radius_m": 15.3,
+              "total_block_depth_m": 19.4
+            },
+            "tactical_assessment": "Operates predominantly in a High Pressing Block (Aggressive Frontline) (40.9% of phases). Backline anchors at an average of 45.2m from own goal, maintaining a tight 10.4m separation to the midfield unit and an overall vertical block depth of 19.4m."
+          },
+          "1": {
+            "sample_count": 1894,
+            "dominant_shape_category": "deep_low_block",
+            "dominant_shape_title": "Deep Low-Block (Penalty Box Defense)",
+            "shape_distribution_pct": {
+              "compact_mid_block": 13.0,
+              "asymmetric_flank_overload": 6.2,
+              "high_press_front_aggression": 34.5,
+              "deep_low_block": 41.4,
+              "positional_possession_expansion": 0.3,
+              "counter_attack_rest_defense": 4.6
+            },
+            "defensive_line": {
+              "avg_height_from_own_goal_m": 37.3,
+              "min_height_m": 2.5,
+              "max_height_m": 86.9,
+              "std_height_m": 21.4,
+              "avg_backline_width_m": 28.8
+            },
+            "midfield_unit": {
+              "avg_unit_width_m": 13.6,
+              "avg_separation_to_backline_m": 10.7
+            },
+            "attacking_unit": {
+              "avg_frontline_width_m": 31.3,
+              "avg_separation_to_midfield_m": 8.2
+            },
+            "team_metrics": {
+              "avg_length_m": 31.1,
+              "avg_width_m": 37.0,
+              "avg_compactness_radius_m": 14.2,
+              "total_block_depth_m": 19.0
+            },
+            "tactical_assessment": "Operates predominantly in a Deep Low-Block (Penalty Box Defense) (41.4% of phases). Backline anchors at an average of 37.3m from own goal, maintaining a tight 10.7m separation to the midfield unit and an overall vertical block depth of 19.0m."
+          }
+        }
+      },
+      "full_match_profiles": {
+        "0": {
+          "sample_count": 3621,
+          "dominant_shape_category": "high_press_front_aggression",
+          "dominant_shape_title": "High Pressing Block (Aggressive Frontline)",
+          "shape_distribution_pct": {
+            "compact_mid_block": 19.6,
+            "high_press_front_aggression": 40.8,
+            "asymmetric_flank_overload": 8.6,
+            "positional_possession_expansion": 1.5,
+            "deep_low_block": 27.9,
+            "counter_attack_rest_defense": 1.7
+          },
+          "defensive_line": {
+            "avg_height_from_own_goal_m": 43.2,
+            "min_height_m": 3.5,
+            "max_height_m": 94.0,
+            "std_height_m": 20.6,
+            "avg_backline_width_m": 36.3
+          },
+          "midfield_unit": {
+            "avg_unit_width_m": 13.8,
+            "avg_separation_to_backline_m": 10.3
+          },
+          "attacking_unit": {
+            "avg_frontline_width_m": 31.5,
+            "avg_separation_to_midfield_m": 8.5
+          },
+          "team_metrics": {
+            "avg_length_m": 31.2,
+            "avg_width_m": 41.2,
+            "avg_compactness_radius_m": 15.5,
+            "total_block_depth_m": 18.8
+          },
+          "tactical_assessment": "Operates predominantly in a High Pressing Block (Aggressive Frontline) (40.8% of phases). Backline anchors at an average of 43.2m from own goal, maintaining a tight 10.3m separation to the midfield unit and an overall vertical block depth of 18.8m."
+        },
+        "1": {
+          "sample_count": 3621,
+          "dominant_shape_category": "high_press_front_aggression",
+          "dominant_shape_title": "High Pressing Block (Aggressive Frontline)",
+          "shape_distribution_pct": {
+            "compact_mid_block": 18.2,
+            "deep_low_block": 33.6,
+            "asymmetric_flank_overload": 6.7,
+            "high_press_front_aggression": 38.6,
+            "counter_attack_rest_defense": 2.7,
+            "positional_possession_expansion": 0.3
+          },
+          "defensive_line": {
+            "avg_height_from_own_goal_m": 39.7,
+            "min_height_m": 2.5,
+            "max_height_m": 88.2,
+            "std_height_m": 20.4,
+            "avg_backline_width_m": 31.3
+          },
+          "midfield_unit": {
+            "avg_unit_width_m": 14.5,
+            "avg_separation_to_backline_m": 10.4
+          },
+          "attacking_unit": {
+            "avg_frontline_width_m": 33.7,
+            "avg_separation_to_midfield_m": 8.1
+          },
+          "team_metrics": {
+            "avg_length_m": 30.4,
+            "avg_width_m": 39.7,
+            "avg_compactness_radius_m": 14.7,
+            "total_block_depth_m": 18.5
+          },
+          "tactical_assessment": "Operates predominantly in a High Pressing Block (Aggressive Frontline) (38.6% of phases). Backline anchors at an average of 39.7m from own goal, maintaining a tight 10.4m separation to the midfield unit and an overall vertical block depth of 18.5m."
+        }
+      }
+    },
+    "game_39": {
+      "match_id": "game_39",
+      "match_name": "Newcastle United vs Paris Saint-Germain",
+      "competition": "UEFA Champions League (Group Stage)",
+      "date": "2023-10-04",
+      "teams": {
+        "0": {
+          "code": "NEW",
+          "name": "Newcastle United"
+        },
+        "1": {
+          "code": "PSG",
+          "name": "Paris Saint-Germain"
+        }
+      },
+      "halves": {
+        "H1": {
+          "0": {
+            "sample_count": 1950,
+            "dominant_shape_category": "high_press_front_aggression",
+            "dominant_shape_title": "High Pressing Block (Aggressive Frontline)",
+            "shape_distribution_pct": {
+              "compact_mid_block": 18.2,
+              "deep_low_block": 24.3,
+              "asymmetric_flank_overload": 10.5,
+              "high_press_front_aggression": 45.7,
+              "positional_possession_expansion": 0.8,
+              "counter_attack_rest_defense": 0.6
+            },
+            "defensive_line": {
+              "avg_height_from_own_goal_m": 47.2,
+              "min_height_m": 2.7,
+              "max_height_m": 95.7,
+              "std_height_m": 22.3,
+              "avg_backline_width_m": 32.1
+            },
+            "midfield_unit": {
+              "avg_unit_width_m": 15.9,
+              "avg_separation_to_backline_m": 10.8
+            },
+            "attacking_unit": {
+              "avg_frontline_width_m": 26.8,
+              "avg_separation_to_midfield_m": 8.7
+            },
+            "team_metrics": {
+              "avg_length_m": 30.9,
+              "avg_width_m": 36.7,
+              "avg_compactness_radius_m": 14.2,
+              "total_block_depth_m": 19.4
+            },
+            "tactical_assessment": "Operates predominantly in a High Pressing Block (Aggressive Frontline) (45.7% of phases). Backline anchors at an average of 47.2m from own goal, maintaining a tight 10.8m separation to the midfield unit and an overall vertical block depth of 19.4m."
+          },
+          "1": {
+            "sample_count": 1950,
+            "dominant_shape_category": "deep_low_block",
+            "dominant_shape_title": "Deep Low-Block (Penalty Box Defense)",
+            "shape_distribution_pct": {
+              "high_press_front_aggression": 25.4,
+              "compact_mid_block": 13.0,
+              "asymmetric_flank_overload": 8.7,
+              "deep_low_block": 49.5,
+              "positional_possession_expansion": 1.3,
+              "counter_attack_rest_defense": 2.1
+            },
+            "defensive_line": {
+              "avg_height_from_own_goal_m": 34.4,
+              "min_height_m": 3.6,
+              "max_height_m": 93.4,
+              "std_height_m": 19.9,
+              "avg_backline_width_m": 33.9
+            },
+            "midfield_unit": {
+              "avg_unit_width_m": 18.4,
+              "avg_separation_to_backline_m": 13.0
+            },
+            "attacking_unit": {
+              "avg_frontline_width_m": 30.7,
+              "avg_separation_to_midfield_m": 7.6
+            },
+            "team_metrics": {
+              "avg_length_m": 33.2,
+              "avg_width_m": 41.3,
+              "avg_compactness_radius_m": 16.0,
+              "total_block_depth_m": 20.6
+            },
+            "tactical_assessment": "Operates predominantly in a Deep Low-Block (Penalty Box Defense) (49.5% of phases). Backline anchors at an average of 34.4m from own goal, maintaining a tight 13.0m separation to the midfield unit and an overall vertical block depth of 20.6m."
+          }
+        },
+        "H2": {
+          "0": {
+            "sample_count": 1909,
+            "dominant_shape_category": "deep_low_block",
+            "dominant_shape_title": "Deep Low-Block (Penalty Box Defense)",
+            "shape_distribution_pct": {
+              "compact_mid_block": 18.4,
+              "positional_possession_expansion": 0.1,
+              "asymmetric_flank_overload": 15.5,
+              "high_press_front_aggression": 27.9,
+              "deep_low_block": 38.0,
+              "counter_attack_rest_defense": 0.3
+            },
+            "defensive_line": {
+              "avg_height_from_own_goal_m": 37.1,
+              "min_height_m": 3.5,
+              "max_height_m": 86.2,
+              "std_height_m": 19.0,
+              "avg_backline_width_m": 28.8
+            },
+            "midfield_unit": {
+              "avg_unit_width_m": 14.5,
+              "avg_separation_to_backline_m": 10.8
+            },
+            "attacking_unit": {
+              "avg_frontline_width_m": 28.4,
+              "avg_separation_to_midfield_m": 7.3
+            },
+            "team_metrics": {
+              "avg_length_m": 29.8,
+              "avg_width_m": 34.1,
+              "avg_compactness_radius_m": 13.3,
+              "total_block_depth_m": 18.1
+            },
+            "tactical_assessment": "Operates predominantly in a Deep Low-Block (Penalty Box Defense) (38.0% of phases). Backline anchors at an average of 37.1m from own goal, maintaining a tight 10.8m separation to the midfield unit and an overall vertical block depth of 18.1m."
+          },
+          "1": {
+            "sample_count": 1909,
+            "dominant_shape_category": "high_press_front_aggression",
+            "dominant_shape_title": "High Pressing Block (Aggressive Frontline)",
+            "shape_distribution_pct": {
+              "compact_mid_block": 13.8,
+              "asymmetric_flank_overload": 11.4,
+              "deep_low_block": 27.7,
+              "high_press_front_aggression": 43.3,
+              "positional_possession_expansion": 0.9,
+              "counter_attack_rest_defense": 2.9
+            },
+            "defensive_line": {
+              "avg_height_from_own_goal_m": 45.1,
+              "min_height_m": 5.5,
+              "max_height_m": 93.7,
+              "std_height_m": 21.9,
+              "avg_backline_width_m": 34.4
+            },
+            "midfield_unit": {
+              "avg_unit_width_m": 17.6,
+              "avg_separation_to_backline_m": 11.6
+            },
+            "attacking_unit": {
+              "avg_frontline_width_m": 32.9,
+              "avg_separation_to_midfield_m": 8.3
+            },
+            "team_metrics": {
+              "avg_length_m": 32.3,
+              "avg_width_m": 41.3,
+              "avg_compactness_radius_m": 15.7,
+              "total_block_depth_m": 19.9
+            },
+            "tactical_assessment": "Operates predominantly in a High Pressing Block (Aggressive Frontline) (43.3% of phases). Backline anchors at an average of 45.1m from own goal, maintaining a tight 11.6m separation to the midfield unit and an overall vertical block depth of 19.9m."
+          }
+        }
+      },
+      "full_match_profiles": {
+        "0": {
+          "sample_count": 3859,
+          "dominant_shape_category": "high_press_front_aggression",
+          "dominant_shape_title": "High Pressing Block (Aggressive Frontline)",
+          "shape_distribution_pct": {
+            "compact_mid_block": 18.3,
+            "deep_low_block": 31.0,
+            "asymmetric_flank_overload": 12.9,
+            "high_press_front_aggression": 36.9,
+            "positional_possession_expansion": 0.4,
+            "counter_attack_rest_defense": 0.4
+          },
+          "defensive_line": {
+            "avg_height_from_own_goal_m": 42.2,
+            "min_height_m": 2.7,
+            "max_height_m": 95.7,
+            "std_height_m": 21.3,
+            "avg_backline_width_m": 30.5
+          },
+          "midfield_unit": {
+            "avg_unit_width_m": 15.2,
+            "avg_separation_to_backline_m": 10.8
+          },
+          "attacking_unit": {
+            "avg_frontline_width_m": 27.6,
+            "avg_separation_to_midfield_m": 8.0
+          },
+          "team_metrics": {
+            "avg_length_m": 30.4,
+            "avg_width_m": 35.4,
+            "avg_compactness_radius_m": 13.8,
+            "total_block_depth_m": 18.8
+          },
+          "tactical_assessment": "Operates predominantly in a High Pressing Block (Aggressive Frontline) (36.9% of phases). Backline anchors at an average of 42.2m from own goal, maintaining a tight 10.8m separation to the midfield unit and an overall vertical block depth of 18.8m."
+        },
+        "1": {
+          "sample_count": 3859,
+          "dominant_shape_category": "deep_low_block",
+          "dominant_shape_title": "Deep Low-Block (Penalty Box Defense)",
+          "shape_distribution_pct": {
+            "high_press_front_aggression": 34.3,
+            "compact_mid_block": 13.4,
+            "asymmetric_flank_overload": 10.0,
+            "deep_low_block": 38.7,
+            "positional_possession_expansion": 1.1,
+            "counter_attack_rest_defense": 2.5
+          },
+          "defensive_line": {
+            "avg_height_from_own_goal_m": 39.7,
+            "min_height_m": 3.6,
+            "max_height_m": 93.7,
+            "std_height_m": 21.6,
+            "avg_backline_width_m": 34.2
+          },
+          "midfield_unit": {
+            "avg_unit_width_m": 18.0,
+            "avg_separation_to_backline_m": 12.3
+          },
+          "attacking_unit": {
+            "avg_frontline_width_m": 31.8,
+            "avg_separation_to_midfield_m": 7.9
+          },
+          "team_metrics": {
+            "avg_length_m": 32.8,
+            "avg_width_m": 41.3,
+            "avg_compactness_radius_m": 15.9,
+            "total_block_depth_m": 20.2
+          },
+          "tactical_assessment": "Operates predominantly in a Deep Low-Block (Penalty Box Defense) (38.7% of phases). Backline anchors at an average of 39.7m from own goal, maintaining a tight 12.3m separation to the midfield unit and an overall vertical block depth of 20.2m."
+        }
+      }
+    },
+    "game_49": {
+      "match_id": "game_49",
+      "match_name": "FC Barcelona vs Real Betis",
+      "competition": "LaLiga EA Sports (Matchday 5)",
+      "date": "2023-09-16",
+      "teams": {
+        "0": {
+          "code": "FCB",
+          "name": "FC Barcelona"
+        },
+        "1": {
+          "code": "BET",
+          "name": "Real Betis"
+        }
+      },
+      "halves": {
+        "H1": {
+          "0": {
+            "sample_count": 1812,
+            "dominant_shape_category": "high_press_front_aggression",
+            "dominant_shape_title": "High Pressing Block (Aggressive Frontline)",
+            "shape_distribution_pct": {
+              "compact_mid_block": 16.2,
+              "deep_low_block": 23.4,
+              "high_press_front_aggression": 48.8,
+              "asymmetric_flank_overload": 8.8,
+              "counter_attack_rest_defense": 2.4,
+              "positional_possession_expansion": 0.4
+            },
+            "defensive_line": {
+              "avg_height_from_own_goal_m": 45.8,
+              "min_height_m": 4.1,
+              "max_height_m": 89.3,
+              "std_height_m": 20.4,
+              "avg_backline_width_m": 35.1
+            },
+            "midfield_unit": {
+              "avg_unit_width_m": 16.7,
+              "avg_separation_to_backline_m": 7.9
+            },
+            "attacking_unit": {
+              "avg_frontline_width_m": 32.2,
+              "avg_separation_to_midfield_m": 11.3
+            },
+            "team_metrics": {
+              "avg_length_m": 31.2,
+              "avg_width_m": 42.7,
+              "avg_compactness_radius_m": 15.5,
+              "total_block_depth_m": 19.1
+            },
+            "tactical_assessment": "Operates predominantly in a High Pressing Block (Aggressive Frontline) (48.8% of phases). Backline anchors at an average of 45.8m from own goal, maintaining a tight 7.9m separation to the midfield unit and an overall vertical block depth of 19.1m."
+          },
+          "1": {
+            "sample_count": 1812,
+            "dominant_shape_category": "deep_low_block",
+            "dominant_shape_title": "Deep Low-Block (Penalty Box Defense)",
+            "shape_distribution_pct": {
+              "compact_mid_block": 14.0,
+              "asymmetric_flank_overload": 11.0,
+              "high_press_front_aggression": 36.5,
+              "deep_low_block": 37.5,
+              "positional_possession_expansion": 0.4,
+              "counter_attack_rest_defense": 0.6
+            },
+            "defensive_line": {
+              "avg_height_from_own_goal_m": 37.7,
+              "min_height_m": 2.9,
+              "max_height_m": 89.4,
+              "std_height_m": 20.8,
+              "avg_backline_width_m": 33.4
+            },
+            "midfield_unit": {
+              "avg_unit_width_m": 16.5,
+              "avg_separation_to_backline_m": 10.9
+            },
+            "attacking_unit": {
+              "avg_frontline_width_m": 29.3,
+              "avg_separation_to_midfield_m": 6.8
+            },
+            "team_metrics": {
+              "avg_length_m": 28.8,
+              "avg_width_m": 39.2,
+              "avg_compactness_radius_m": 14.5,
+              "total_block_depth_m": 17.7
+            },
+            "tactical_assessment": "Operates predominantly in a Deep Low-Block (Penalty Box Defense) (37.5% of phases). Backline anchors at an average of 37.7m from own goal, maintaining a tight 10.9m separation to the midfield unit and an overall vertical block depth of 17.7m."
+          }
+        },
+        "H2": {
+          "0": {
+            "sample_count": 1763,
+            "dominant_shape_category": "high_press_front_aggression",
+            "dominant_shape_title": "High Pressing Block (Aggressive Frontline)",
+            "shape_distribution_pct": {
+              "compact_mid_block": 18.9,
+              "high_press_front_aggression": 48.8,
+              "asymmetric_flank_overload": 6.0,
+              "positional_possession_expansion": 0.5,
+              "counter_attack_rest_defense": 1.6,
+              "deep_low_block": 24.2
+            },
+            "defensive_line": {
+              "avg_height_from_own_goal_m": 45.8,
+              "min_height_m": 5.6,
+              "max_height_m": 94.7,
+              "std_height_m": 20.3,
+              "avg_backline_width_m": 38.3
+            },
+            "midfield_unit": {
+              "avg_unit_width_m": 16.9,
+              "avg_separation_to_backline_m": 8.2
+            },
+            "attacking_unit": {
+              "avg_frontline_width_m": 31.4,
+              "avg_separation_to_midfield_m": 11.4
+            },
+            "team_metrics": {
+              "avg_length_m": 33.3,
+              "avg_width_m": 44.0,
+              "avg_compactness_radius_m": 16.2,
+              "total_block_depth_m": 19.6
+            },
+            "tactical_assessment": "Operates predominantly in a High Pressing Block (Aggressive Frontline) (48.8% of phases). Backline anchors at an average of 45.8m from own goal, maintaining a tight 8.2m separation to the midfield unit and an overall vertical block depth of 19.6m."
+          },
+          "1": {
+            "sample_count": 1763,
+            "dominant_shape_category": "deep_low_block",
+            "dominant_shape_title": "Deep Low-Block (Penalty Box Defense)",
+            "shape_distribution_pct": {
+              "compact_mid_block": 20.4,
+              "deep_low_block": 39.5,
+              "asymmetric_flank_overload": 6.2,
+              "high_press_front_aggression": 31.8,
+              "counter_attack_rest_defense": 1.3,
+              "positional_possession_expansion": 0.7
+            },
+            "defensive_line": {
+              "avg_height_from_own_goal_m": 36.4,
+              "min_height_m": 4.2,
+              "max_height_m": 82.8,
+              "std_height_m": 18.9,
+              "avg_backline_width_m": 33.9
+            },
+            "midfield_unit": {
+              "avg_unit_width_m": 14.0,
+              "avg_separation_to_backline_m": 11.5
+            },
+            "attacking_unit": {
+              "avg_frontline_width_m": 33.3,
+              "avg_separation_to_midfield_m": 7.3
+            },
+            "team_metrics": {
+              "avg_length_m": 30.4,
+              "avg_width_m": 39.9,
+              "avg_compactness_radius_m": 15.0,
+              "total_block_depth_m": 18.8
+            },
+            "tactical_assessment": "Operates predominantly in a Deep Low-Block (Penalty Box Defense) (39.5% of phases). Backline anchors at an average of 36.4m from own goal, maintaining a tight 11.5m separation to the midfield unit and an overall vertical block depth of 18.8m."
+          }
+        }
+      },
+      "full_match_profiles": {
+        "0": {
+          "sample_count": 3575,
+          "dominant_shape_category": "high_press_front_aggression",
+          "dominant_shape_title": "High Pressing Block (Aggressive Frontline)",
+          "shape_distribution_pct": {
+            "compact_mid_block": 17.5,
+            "deep_low_block": 23.8,
+            "high_press_front_aggression": 48.8,
+            "asymmetric_flank_overload": 7.4,
+            "counter_attack_rest_defense": 2.0,
+            "positional_possession_expansion": 0.4
+          },
+          "defensive_line": {
+            "avg_height_from_own_goal_m": 45.8,
+            "min_height_m": 4.1,
+            "max_height_m": 94.7,
+            "std_height_m": 20.3,
+            "avg_backline_width_m": 36.7
+          },
+          "midfield_unit": {
+            "avg_unit_width_m": 16.8,
+            "avg_separation_to_backline_m": 8.0
+          },
+          "attacking_unit": {
+            "avg_frontline_width_m": 31.8,
+            "avg_separation_to_midfield_m": 11.3
+          },
+          "team_metrics": {
+            "avg_length_m": 32.2,
+            "avg_width_m": 43.3,
+            "avg_compactness_radius_m": 15.8,
+            "total_block_depth_m": 19.4
+          },
+          "tactical_assessment": "Operates predominantly in a High Pressing Block (Aggressive Frontline) (48.8% of phases). Backline anchors at an average of 45.8m from own goal, maintaining a tight 8.0m separation to the midfield unit and an overall vertical block depth of 19.4m."
+        },
+        "1": {
+          "sample_count": 3575,
+          "dominant_shape_category": "deep_low_block",
+          "dominant_shape_title": "Deep Low-Block (Penalty Box Defense)",
+          "shape_distribution_pct": {
+            "compact_mid_block": 17.1,
+            "asymmetric_flank_overload": 8.7,
+            "high_press_front_aggression": 34.2,
+            "deep_low_block": 38.5,
+            "positional_possession_expansion": 0.6,
+            "counter_attack_rest_defense": 0.9
+          },
+          "defensive_line": {
+            "avg_height_from_own_goal_m": 37.1,
+            "min_height_m": 2.9,
+            "max_height_m": 89.4,
+            "std_height_m": 19.9,
+            "avg_backline_width_m": 33.7
+          },
+          "midfield_unit": {
+            "avg_unit_width_m": 15.2,
+            "avg_separation_to_backline_m": 11.2
+          },
+          "attacking_unit": {
+            "avg_frontline_width_m": 31.3,
+            "avg_separation_to_midfield_m": 7.0
+          },
+          "team_metrics": {
+            "avg_length_m": 29.6,
+            "avg_width_m": 39.5,
+            "avg_compactness_radius_m": 14.8,
+            "total_block_depth_m": 18.3
+          },
+          "tactical_assessment": "Operates predominantly in a Deep Low-Block (Penalty Box Defense) (38.5% of phases). Backline anchors at an average of 37.1m from own goal, maintaining a tight 11.2m separation to the midfield unit and an overall vertical block depth of 18.3m."
+        }
+      }
+    },
+    "game_51": {
+      "match_id": "game_51",
+      "match_name": "FC Barcelona vs Celta Vigo",
+      "competition": "LaLiga EA Sports (Matchday 6)",
+      "date": "2023-09-23",
+      "teams": {
+        "0": {
+          "code": "FCB",
+          "name": "FC Barcelona"
+        },
+        "1": {
+          "code": "CEL",
+          "name": "RC Celta de Vigo"
+        }
+      },
+      "halves": {
+        "H1": {
+          "0": {
+            "sample_count": 1799,
+            "dominant_shape_category": "high_press_front_aggression",
+            "dominant_shape_title": "High Pressing Block (Aggressive Frontline)",
+            "shape_distribution_pct": {
+              "compact_mid_block": 11.3,
+              "high_press_front_aggression": 62.4,
+              "asymmetric_flank_overload": 5.6,
+              "deep_low_block": 19.0,
+              "counter_attack_rest_defense": 0.8,
+              "positional_possession_expansion": 0.9
+            },
+            "defensive_line": {
+              "avg_height_from_own_goal_m": 50.0,
+              "min_height_m": 3.8,
+              "max_height_m": 83.4,
+              "std_height_m": 19.2,
+              "avg_backline_width_m": 37.9
+            },
+            "midfield_unit": {
+              "avg_unit_width_m": 16.3,
+              "avg_separation_to_backline_m": 6.7
+            },
+            "attacking_unit": {
+              "avg_frontline_width_m": 31.1,
+              "avg_separation_to_midfield_m": 10.9
+            },
+            "team_metrics": {
+              "avg_length_m": 30.0,
+              "avg_width_m": 43.3,
+              "avg_compactness_radius_m": 15.4,
+              "total_block_depth_m": 17.7
+            },
+            "tactical_assessment": "Operates predominantly in a High Pressing Block (Aggressive Frontline) (62.4% of phases). Backline anchors at an average of 50.0m from own goal, maintaining a tight 6.7m separation to the midfield unit and an overall vertical block depth of 17.7m."
+          },
+          "1": {
+            "sample_count": 1799,
+            "dominant_shape_category": "deep_low_block",
+            "dominant_shape_title": "Deep Low-Block (Penalty Box Defense)",
+            "shape_distribution_pct": {
+              "compact_mid_block": 17.2,
+              "asymmetric_flank_overload": 9.5,
+              "high_press_front_aggression": 25.8,
+              "deep_low_block": 46.9,
+              "positional_possession_expansion": 0.2,
+              "counter_attack_rest_defense": 0.3
+            },
+            "defensive_line": {
+              "avg_height_from_own_goal_m": 35.7,
+              "min_height_m": 4.8,
+              "max_height_m": 89.8,
+              "std_height_m": 17.9,
+              "avg_backline_width_m": 37.6
+            },
+            "midfield_unit": {
+              "avg_unit_width_m": 21.5,
+              "avg_separation_to_backline_m": 6.7
+            },
+            "attacking_unit": {
+              "avg_frontline_width_m": 12.8,
+              "avg_separation_to_midfield_m": 7.7
+            },
+            "team_metrics": {
+              "avg_length_m": 26.0,
+              "avg_width_m": 38.5,
+              "avg_compactness_radius_m": 13.7,
+              "total_block_depth_m": 14.3
+            },
+            "tactical_assessment": "Operates predominantly in a Deep Low-Block (Penalty Box Defense) (46.9% of phases). Backline anchors at an average of 35.7m from own goal, maintaining a tight 6.7m separation to the midfield unit and an overall vertical block depth of 14.3m."
+          }
+        },
+        "H2": {
+          "0": {
+            "sample_count": 1966,
+            "dominant_shape_category": "high_press_front_aggression",
+            "dominant_shape_title": "High Pressing Block (Aggressive Frontline)",
+            "shape_distribution_pct": {
+              "high_press_front_aggression": 71.9,
+              "compact_mid_block": 9.6,
+              "asymmetric_flank_overload": 4.8,
+              "positional_possession_expansion": 1.4,
+              "deep_low_block": 10.5,
+              "counter_attack_rest_defense": 1.9
+            },
+            "defensive_line": {
+              "avg_height_from_own_goal_m": 56.4,
+              "min_height_m": 4.8,
+              "max_height_m": 89.5,
+              "std_height_m": 19.3,
+              "avg_backline_width_m": 40.6
+            },
+            "midfield_unit": {
+              "avg_unit_width_m": 17.3,
+              "avg_separation_to_backline_m": 3.5
+            },
+            "attacking_unit": {
+              "avg_frontline_width_m": 23.0,
+              "avg_separation_to_midfield_m": 13.6
+            },
+            "team_metrics": {
+              "avg_length_m": 31.2,
+              "avg_width_m": 45.2,
+              "avg_compactness_radius_m": 16.0,
+              "total_block_depth_m": 17.1
+            },
+            "tactical_assessment": "Operates predominantly in a High Pressing Block (Aggressive Frontline) (71.9% of phases). Backline anchors at an average of 56.4m from own goal, maintaining a tight 3.5m separation to the midfield unit and an overall vertical block depth of 17.1m."
+          },
+          "1": {
+            "sample_count": 1966,
+            "dominant_shape_category": "deep_low_block",
+            "dominant_shape_title": "Deep Low-Block (Penalty Box Defense)",
+            "shape_distribution_pct": {
+              "compact_mid_block": 20.0,
+              "high_press_front_aggression": 18.8,
+              "asymmetric_flank_overload": 10.7,
+              "deep_low_block": 49.3,
+              "positional_possession_expansion": 0.2,
+              "counter_attack_rest_defense": 1.0
+            },
+            "defensive_line": {
+              "avg_height_from_own_goal_m": 32.7,
+              "min_height_m": 4.7,
+              "max_height_m": 88.0,
+              "std_height_m": 17.7,
+              "avg_backline_width_m": 37.0
+            },
+            "midfield_unit": {
+              "avg_unit_width_m": 22.5,
+              "avg_separation_to_backline_m": 6.7
+            },
+            "attacking_unit": {
+              "avg_frontline_width_m": 12.2,
+              "avg_separation_to_midfield_m": 8.6
+            },
+            "team_metrics": {
+              "avg_length_m": 27.3,
+              "avg_width_m": 38.6,
+              "avg_compactness_radius_m": 13.8,
+              "total_block_depth_m": 15.3
+            },
+            "tactical_assessment": "Operates predominantly in a Deep Low-Block (Penalty Box Defense) (49.3% of phases). Backline anchors at an average of 32.7m from own goal, maintaining a tight 6.7m separation to the midfield unit and an overall vertical block depth of 15.3m."
+          }
+        }
+      },
+      "full_match_profiles": {
+        "0": {
+          "sample_count": 3765,
+          "dominant_shape_category": "high_press_front_aggression",
+          "dominant_shape_title": "High Pressing Block (Aggressive Frontline)",
+          "shape_distribution_pct": {
+            "compact_mid_block": 10.4,
+            "high_press_front_aggression": 67.3,
+            "asymmetric_flank_overload": 5.2,
+            "deep_low_block": 14.6,
+            "counter_attack_rest_defense": 1.4,
+            "positional_possession_expansion": 1.1
+          },
+          "defensive_line": {
+            "avg_height_from_own_goal_m": 53.3,
+            "min_height_m": 3.8,
+            "max_height_m": 89.5,
+            "std_height_m": 19.5,
+            "avg_backline_width_m": 39.3
+          },
+          "midfield_unit": {
+            "avg_unit_width_m": 16.8,
+            "avg_separation_to_backline_m": 5.0
+          },
+          "attacking_unit": {
+            "avg_frontline_width_m": 26.9,
+            "avg_separation_to_midfield_m": 12.3
+          },
+          "team_metrics": {
+            "avg_length_m": 30.6,
+            "avg_width_m": 44.3,
+            "avg_compactness_radius_m": 15.7,
+            "total_block_depth_m": 17.3
+          },
+          "tactical_assessment": "Operates predominantly in a High Pressing Block (Aggressive Frontline) (67.3% of phases). Backline anchors at an average of 53.3m from own goal, maintaining a tight 5.0m separation to the midfield unit and an overall vertical block depth of 17.3m."
+        },
+        "1": {
+          "sample_count": 3765,
+          "dominant_shape_category": "deep_low_block",
+          "dominant_shape_title": "Deep Low-Block (Penalty Box Defense)",
+          "shape_distribution_pct": {
+            "compact_mid_block": 18.7,
+            "asymmetric_flank_overload": 10.1,
+            "high_press_front_aggression": 22.2,
+            "deep_low_block": 48.1,
+            "positional_possession_expansion": 0.2,
+            "counter_attack_rest_defense": 0.7
+          },
+          "defensive_line": {
+            "avg_height_from_own_goal_m": 34.1,
+            "min_height_m": 4.7,
+            "max_height_m": 89.8,
+            "std_height_m": 17.9,
+            "avg_backline_width_m": 37.3
+          },
+          "midfield_unit": {
+            "avg_unit_width_m": 22.1,
+            "avg_separation_to_backline_m": 6.7
+          },
+          "attacking_unit": {
+            "avg_frontline_width_m": 12.5,
+            "avg_separation_to_midfield_m": 8.2
+          },
+          "team_metrics": {
+            "avg_length_m": 26.7,
+            "avg_width_m": 38.5,
+            "avg_compactness_radius_m": 13.7,
+            "total_block_depth_m": 14.8
+          },
+          "tactical_assessment": "Operates predominantly in a Deep Low-Block (Penalty Box Defense) (48.1% of phases). Backline anchors at an average of 34.1m from own goal, maintaining a tight 6.7m separation to the midfield unit and an overall vertical block depth of 14.8m."
+        }
+      }
+    }
+  }
+}
