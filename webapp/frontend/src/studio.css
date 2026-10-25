@@ -148,6 +148,15 @@ button:disabled { cursor: not-allowed; }
 .desk-content .coach-ai-prompt-input { background: transparent; color: #e0ded8; }
 .desk-content .coach-ai-prompt-input::placeholder { color: #7e828b; }
 .desk-content .team-toggle-options, .desk-content .coach-ai-prompt-form { flex-wrap: wrap; }
+.desk-content .ai-tactical-briefing-card { background: #17191d !important; border: 1px solid #2e3137 !important; border-radius: 6px !important; padding: 18px 20px !important; }
+.desk-content .briefing-badge-text { color: #a0b49a !important; font-size: 11px !important; font-weight: 700 !important; }
+.desk-content .briefing-model-pill { background: #23252a !important; border-color: #393c44 !important; color: #a0b49a !important; font-size: 10px !important; }
+.desk-content .verdict-label { color: #a0b49a !important; font-size: 11px !important; font-weight: 700 !important; letter-spacing: 0.8px !important; text-transform: uppercase !important; }
+.desk-content .verdict-text { font-family: var(--font-sans, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif) !important; font-size: 13.5px !important; line-height: 1.65 !important; color: #e2e1dd !important; font-weight: 450 !important; letter-spacing: 0.15px !important; }
+.desk-content .briefing-instructions-box { background: #121417 !important; border: 1px solid #2d3036 !important; border-left: 3px solid #cc956d !important; border-radius: 5px !important; padding: 14px 18px !important; margin-top: 14px !important; }
+.desk-content .instructions-label { color: #d79a73 !important; font-size: 11px !important; font-weight: 700 !important; letter-spacing: 0.8px !important; text-transform: uppercase !important; margin-bottom: 10px !important; }
+.desk-content .instruction-num { background: #cc956d !important; color: #1c1510 !important; font-size: 11px !important; font-weight: 700 !important; width: 20px !important; height: 20px !important; box-shadow: none !important; }
+.desk-content .instruction-text { font-family: var(--font-sans, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif) !important; font-size: 13.5px !important; color: #f1f0eb !important; line-height: 1.6 !important; font-weight: 450 !important; letter-spacing: 0.15px !important; }
 .desk-content .video-container { background: #0d0e0f; }
 .desk-content .video-element { max-height: 70vh; }
 .desk-content .pitch-stage-wrapper { background: #17201b; min-height: 280px; }

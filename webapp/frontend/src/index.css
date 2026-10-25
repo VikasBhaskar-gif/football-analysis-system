@@ -5113,71 +5113,80 @@ body {
 }
 
 .briefing-verdict-box {
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 
 .verdict-label {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
-  color: #0d9488;
-  letter-spacing: 0.5px;
+  color: #10b981;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
 }
 
 .verdict-text {
-  font-size: 12px;
-  line-height: 1.55;
-  color: var(--text-primary, #0f172a);
-  margin-top: 3px;
-  font-weight: 500;
+  font-family: var(--font-sans, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #f1f5f9;
+  margin-top: 6px;
+  font-weight: 450;
+  letter-spacing: 0.15px;
 }
 
 .briefing-instructions-box {
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-left: 3px solid #0284c7;
   border-radius: 8px;
-  padding: 10px 12px;
+  padding: 14px 18px;
+  margin-top: 14px;
 }
 
 .instructions-label {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
-  color: #0284c7;
-  letter-spacing: 0.5px;
-  margin-bottom: 6px;
+  color: #38bdf8;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
 .instructions-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
 }
 
 .instruction-item {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
+  gap: 12px;
 }
 
 .instruction-num {
-  width: 17px;
-  height: 17px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: #0284c7;
   color: #ffffff;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  margin-top: 1px;
+  margin-top: 2px;
+  box-shadow: 0 0 10px rgba(2, 132, 199, 0.4);
 }
 
 .instruction-text {
-  font-size: 11px;
-  color: var(--text-primary, #0f172a);
-  line-height: 1.45;
-  font-weight: 500;
+  font-family: var(--font-sans, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 13.5px;
+  color: #f8fafc;
+  line-height: 1.6;
+  font-weight: 450;
+  letter-spacing: 0.15px;
 }
 
 /* ========================================================================= */
