@@ -112,7 +112,7 @@ button:disabled { cursor: not-allowed; }
 .desk-periods { display: flex; border: 1px solid #393c42; padding: 3px; gap: 3px; border-radius: 4px; }
 .desk-periods button { background: transparent; border: 0; color: #8e929b; padding: 6px 9px; font-size: 9px; border-radius: 3px; cursor: pointer; white-space: nowrap; }
 .desk-periods button.selected { background: #44413c; color: #e0c5b0; }
-.desk-content .workspace-columns-container { grid-template-columns: minmax(0, 1fr) 310px; gap: 16px; }
+.desk-content .workspace-columns-container { grid-template-columns: minmax(0, 1fr) clamp(390px, 30vw, 480px); gap: 18px; }
 .desk-content .right-analysis-column { top: 85px; }
 .desk-content .right-analysis-column .analysis-panel { max-height: calc(100vh - 110px); }
 .desk-content :is(.video-stage-card, .tactical-pitch-card, .analysis-panel, .matchup-header-strip, .coach-ai-command-card, .ai-executive-banner, .ai-clips-card, .ai-multi-pitch-card, .ai-detail-panel-card, .card, .pass-lane-card, .shooting-corridor-card, .candidate-card, .ai-tactical-briefing-card) { background: var(--bg-card); border-color: #34363a; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; transform: none; translate: none; }

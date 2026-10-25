@@ -1,6 +1,6 @@
 {
-  "total_queries": 210,
-  "model_version": 197,
+  "total_queries": 211,
+  "model_version": 198,
   "ontology_terms_count": 34,
   "football_ontology": {
     "switch_of_play": "Cross-field pass that shifts the ball laterally across the pitch (>=20m width change, e.g. from one wing/half-space to the opposite flank).",
@@ -48,12 +48,12 @@
     "runs": 6,
     "overlaps": 5,
     "defenders": 5,
-    "wants_heatmap": 19,
+    "wants_heatmap": 20,
     "wants_1v1_duels": 22,
     "wants_dribbles": 17,
-    "wants_passes": 99,
+    "wants_passes": 100,
     "wants_shots": 40,
-    "wants_switches_or_long_balls": 16,
+    "wants_switches_or_long_balls": 17,
     "wants_defensive_line": 50,
     "wants_team_shape": 50,
     "wants_all_games": 11,
@@ -69,7 +69,7 @@
   "queried_players": {
     "Ousmane Demb\u00e9l\u00e9": 21,
     "Dan Burn": 4,
-    "Kylian Mbapp\u00e9": 42,
+    "Kylian Mbapp\u00e9": 43,
     "Kieran Trippier": 24,
     "Jamaal Lascelles": 10,
     "Sean Longstaff": 1,
@@ -158,7 +158,7 @@
       }
     },
     "Kylian Mbapp\u00e9": {
-      "updated_at": "2026-10-26 01:15:12",
+      "updated_at": "2026-10-26 02:26:16",
       "scope": "full_match",
       "facts": {
         "player": "Kylian Mbapp\u00e9",
@@ -492,12 +492,12 @@
       "heatmap": 8,
       "passes": 6,
       "shots": 4,
-      "wants_heatmap": 5,
+      "wants_heatmap": 6,
       "wants_1v1_duels": 13,
       "wants_dribbles": 13,
-      "wants_passes": 19,
+      "wants_passes": 20,
       "wants_shots": 9,
-      "wants_switches_or_long_balls": 4,
+      "wants_switches_or_long_balls": 5,
       "is_teammate_query": 6,
       "wants_teammates_pass_combo": 6,
       "wants_who_passed_most": 4
@@ -809,12 +809,13 @@
     },
     "long": {
       "passes": 1,
-      "wants_passes": 15,
-      "wants_switches_or_long_balls": 15,
+      "wants_passes": 16,
+      "wants_switches_or_long_balls": 16,
       "wants_runs": 1,
       "wants_shots": 1,
       "wants_defensive_line": 1,
-      "wants_team_shape": 1
+      "wants_team_shape": 1,
+      "wants_heatmap": 1
     },
     "other": {
       "passes": 2,
@@ -928,9 +929,10 @@
       "wants_switches_or_long_balls": 1
     },
     "balls": {
-      "wants_passes": 14,
-      "wants_switches_or_long_balls": 14,
-      "wants_runs": 2
+      "wants_passes": 15,
+      "wants_switches_or_long_balls": 15,
+      "wants_runs": 2,
+      "wants_heatmap": 1
     },
     "play": {
       "wants_passes": 1,
@@ -1246,17 +1248,17 @@
       "wants_passes": 1
     },
     "throughout": {
-      "wants_passes": 3,
-      "wants_heatmap": 1,
-      "wants_switches_or_long_balls": 1
+      "wants_passes": 4,
+      "wants_heatmap": 2,
+      "wants_switches_or_long_balls": 2
     },
     "game": {
-      "wants_passes": 3,
+      "wants_passes": 4,
       "wants_defensive_line": 3,
       "wants_team_shape": 3,
-      "wants_heatmap": 1,
+      "wants_heatmap": 2,
       "wants_shots": 2,
-      "wants_switches_or_long_balls": 1
+      "wants_switches_or_long_balls": 2
     },
     "forward": {
       "wants_passes": 1
@@ -1725,12 +1727,31 @@
     "show": {
       "wants_passes": 1,
       "wants_switches_or_long_balls": 1
+    },
+    "heat": {
+      "wants_heatmap": 1,
+      "wants_passes": 1,
+      "wants_switches_or_long_balls": 1
     }
   },
   "learned_preferences": [
     "Prioritize non-standard coaching metrics: pass providers on runs, overlap timing, primary markers, and sub-optimal shot audits."
   ],
   "recent_insights": [
+    {
+      "timestamp": "2026-10-26 02:26:16",
+      "question": "Give me mbappe's heat map and long balls throughout the game.",
+      "intents": [
+        "wants_heatmap",
+        "wants_passes",
+        "wants_switches_or_long_balls"
+      ],
+      "players": [
+        "Kylian Mbapp\u00e9"
+      ],
+      "scope": "full_match",
+      "summary": "On-Ball Passes & Dribbles (#7 Kylian Mbapp\u00e9): Completed 38 of 45 passes (84.4% accuracy), including 9 progressive passes, 8/9 switches of play (6/6 long-ball wing switches), 4/4 long balls (>=25m), 4/6 crosses, and 3 key passes (top receivers: #10 Demb\u00e9l\u00e9 (8), #33 Za\u00efre-Emery (6), #21 Hern\u00e1ndez (6)). On the ball, Mbapp\u00e9 executed 32 ball carries/dribbles, succeeding in 31 (96.9%) with 6 progressive carries covering 145.0m."
+    },
     {
       "timestamp": "2026-10-26 01:15:12",
       "question": "Show me Mbappe's long balls throughout the game ",
@@ -2035,20 +2056,6 @@
       ],
       "scope": "full_match",
       "summary": "On-Ball Passes & Dribbles (#7 Kylian Mbapp\u00e9): Completed 38 of 45 passes (84.4% accuracy), including 9 progressive passes, 8/9 switches of play (6/6 long-ball wing switches), 4/4 long balls (>=25m), 4/6 crosses, and 3 key passes (top receivers: #10 Demb\u00e9l\u00e9 (8), #33 Za\u00efre-Emery (6), #21 Hern\u00e1ndez (6)). On the ball, Mbapp\u00e9 executed 32 ball carries/dribbles, succeeding in 31 (96.9%) with 6 progressive carries covering 145.0m."
-    },
-    {
-      "timestamp": "2026-10-25 13:47:43",
-      "question": "passes Kane received",
-      "intents": [
-        "wants_passes",
-        "wants_who_passed_most",
-        "wants_passes_received"
-      ],
-      "players": [
-        "Harry Kane"
-      ],
-      "scope": "full_match",
-      "summary": "Top Pass Supplier to #9 Harry Kane: #2 Dayot Upamecano passed to Kane the most across Full 90-Minute Match (H1 + H2), completing 7 passes to him (7 progressive, 108.1m total passing distance), followed by #10 San\u00e9 (4 passes), #27 Laimer (4 passes), #3 Min-jae (3 passes). In aggregate, Kane received 27 passes from 8 different teammates."
     }
   ],
   "team_shapes_ontology": {

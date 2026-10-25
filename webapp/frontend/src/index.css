@@ -3601,8 +3601,8 @@ body {
 
 .workspace-columns-container {
   display: grid;
-  grid-template-columns: minmax(0, 1.85fr) minmax(390px, 1fr);
-  gap: 16px;
+  grid-template-columns: minmax(0, 1fr) clamp(390px, 30vw, 480px);
+  gap: 18px;
   width: 100%;
   align-items: start;
 }
