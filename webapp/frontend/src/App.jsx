@@ -6,12 +6,15 @@ import ContextualAnalysisPanel from './components/ContextualAnalysisPanel';
 import CoachAILabSection from './components/CoachAILabSection';
 import UploadPromptView from './components/UploadPromptView';
 import ErrorBoundary from './components/ErrorBoundary';
-import { ChevronDown, FileVideo, Layers, LayoutGrid, Map, MessageSquare, Plus } from 'lucide-react';
+import { ChevronDown, Columns, FileVideo, Layers, LayoutGrid, Map, Maximize2, MessageSquare, Plus } from 'lucide-react';
 
 export default function App() {
   const [catalog, setCatalog] = useState([]);
   const [activeVideo, setActiveVideo] = useState(null);
   const [matchSummary, setMatchSummary] = useState(null);
+
+  // Stage Layout Mode: 'stacked' | 'split' | 'pitch'
+  const [stageLayout, setStageLayout] = useState('stacked');
 
   // Coach Arbitrary Player Selection
   const [selectedPlayerIds, setSelectedPlayerIds] = useState([]);
@@ -540,76 +543,222 @@ export default function App() {
               />
             </div>
 
-            {/* 2. Two-Column Split:
-                 Left Column: Video on top (good size) + 2D Pitch directly below it
-                 Right Column: Pass Lanes, Shooting Lanes & Selected Player Box */}
+            {/* 2. Stage Viewport Layout Switcher & Workspace Stages */}
+            <div className="stage-layout-toolbar">
+              <div className="stage-layout-label">
+                <LayoutGrid size={13} style={{ verticalAlign: 'middle', marginRight: 4 }} />
+                <span>TACTICAL VIEWPORT LAYOUT</span>
+              </div>
+              <div className="stage-layout-pills">
+                <button
+                  type="button"
+                  className={`layout-pill-btn ${stageLayout === 'stacked' ? 'active' : ''}`}
+                  onClick={() => setStageLayout('stacked')}
+                  title="Stacked: Video on top, 2D Pitch below, Analysis on right"
+                >
+                  <Columns size={12} />
+                  <span>Stacked</span>
+                </button>
+                <button
+                  type="button"
+                  className={`layout-pill-btn ${stageLayout === 'split' ? 'active' : ''}`}
+                  onClick={() => setStageLayout('split')}
+                  title="Dual Stage: Video & 2D Tactical Pitch side-by-side"
+                >
+                  <Maximize2 size={12} />
+                  <span>Dual Stage (Side-by-Side)</span>
+                </button>
+                <button
+                  type="button"
+                  className={`layout-pill-btn ${stageLayout === 'pitch' ? 'active' : ''}`}
+                  onClick={() => setStageLayout('pitch')}
+                  title="Focus on 2D Tactical Pitch"
+                >
+                  <Map size={12} />
+                  <span>2D Pitch Focus</span>
+                </button>
+              </div>
+            </div>
+
             <ErrorBoundary>
-              <div className="workspace-columns-container">
-                {/* Left Column: Broadcast Video at top, 2D Pitch directly below */}
-                <div className="left-stage-column" id="left-stage-column">
-                  <div className="video-pane-wrapper" id="video-section">
-                    <VideoPlayer
-                      activeMatch={activeVideo}
+              {stageLayout === 'split' ? (
+                <div className="split-workspace-container">
+                  {/* Top Dual Stage: Video on Left, 2D Pitch on Right side-by-side */}
+                  <div className="dual-stage-grid">
+                    <div className="video-pane-wrapper" id="video-section">
+                      <VideoPlayer
+                        activeMatch={activeVideo}
+                        intervalStart={intervalStart}
+                        setIntervalStart={handleSetIntervalStart}
+                        intervalEnd={intervalEnd}
+                        setIntervalEnd={handleSetIntervalEnd}
+                        currentTime={currentTime}
+                        setCurrentTime={setCurrentTime}
+                        onDurationDiscovered={handleDurationDiscovered}
+                        onRunAnalysis={runAnalysis}
+                        isAnalyzing={isAnalyzing}
+                        overlayData={overlayData}
+                        analysisResult={analysisResult}
+                        seekTargetTime={seekTargetTime}
+                        setSeekTargetTime={setSeekTargetTime}
+                        overlayToggles={overlayToggles}
+                        setOverlayToggles={setOverlayToggles}
+                        onUploadAnotherVideo={handleUploadFile}
+                        isUploading={isUploading}
+                        selectedPlayerIds={selectedPlayerIds}
+                        onTogglePlayerSelection={handleTogglePlayerSelection}
+                        highlightedReceiverId={highlightedReceiverId}
+                        onHighlightReceiver={setHighlightedReceiverId}
+                      />
+                    </div>
+
+                    <div className="pitch-pane-wrapper" id="pitch-section">
+                      <TacticalPitch
+                        overlayData={overlayData}
+                        selectedPlayerIds={selectedPlayerIds}
+                        onTogglePlayerSelection={handleTogglePlayerSelection}
+                        onClearSelection={handleClearSelection}
+                        currentTime={currentTime}
+                        highlightedReceiverId={highlightedReceiverId}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Below Dual Stage: Full-width Passing Lanes & Analysis Panel */}
+                  <div className="split-bottom-row" id="analysis-section">
+                    <ContextualAnalysisPanel
                       intervalStart={intervalStart}
-                      setIntervalStart={handleSetIntervalStart}
                       intervalEnd={intervalEnd}
-                      setIntervalEnd={handleSetIntervalEnd}
-                      currentTime={currentTime}
-                      setCurrentTime={setCurrentTime}
-                      onDurationDiscovered={handleDurationDiscovered}
-                      onRunAnalysis={runAnalysis}
                       isAnalyzing={isAnalyzing}
+                      onRunAnalysis={runAnalysis}
+                      onAskCoachAi={askCoachAi}
                       overlayData={overlayData}
-                      analysisResult={analysisResult}
-                      seekTargetTime={seekTargetTime}
-                      setSeekTargetTime={setSeekTargetTime}
+                      currentTime={currentTime}
+                      selectedPlayerIds={selectedPlayerIds}
+                      onTogglePlayerSelection={handleTogglePlayerSelection}
+                      focusPlayerId={focusPlayerId}
+                      setFocusPlayerId={setFocusPlayerId}
+                      onSeekToTime={handleSeekToTime}
+                      matchSummary={matchSummary}
                       overlayToggles={overlayToggles}
                       setOverlayToggles={setOverlayToggles}
-                      onUploadAnotherVideo={handleUploadFile}
-                      isUploading={isUploading}
-                      selectedPlayerIds={selectedPlayerIds}
-                      onTogglePlayerSelection={handleTogglePlayerSelection}
                       highlightedReceiverId={highlightedReceiverId}
                       onHighlightReceiver={setHighlightedReceiverId}
+                      currentMatch={activeVideo}
                     />
                   </div>
+                </div>
+              ) : (
+                <div className="workspace-columns-container">
+                  {/* Left Column: Stacked or Pitch-first */}
+                  <div className="left-stage-column" id="left-stage-column">
+                    {stageLayout === 'pitch' ? (
+                      <>
+                        <div className="pitch-pane-wrapper" id="pitch-section">
+                          <TacticalPitch
+                            overlayData={overlayData}
+                            selectedPlayerIds={selectedPlayerIds}
+                            onTogglePlayerSelection={handleTogglePlayerSelection}
+                            onClearSelection={handleClearSelection}
+                            currentTime={currentTime}
+                            highlightedReceiverId={highlightedReceiverId}
+                          />
+                        </div>
+                        <div className="video-pane-wrapper" id="video-section">
+                          <VideoPlayer
+                            activeMatch={activeVideo}
+                            intervalStart={intervalStart}
+                            setIntervalStart={handleSetIntervalStart}
+                            intervalEnd={intervalEnd}
+                            setIntervalEnd={handleSetIntervalEnd}
+                            currentTime={currentTime}
+                            setCurrentTime={setCurrentTime}
+                            onDurationDiscovered={handleDurationDiscovered}
+                            onRunAnalysis={runAnalysis}
+                            isAnalyzing={isAnalyzing}
+                            overlayData={overlayData}
+                            analysisResult={analysisResult}
+                            seekTargetTime={seekTargetTime}
+                            setSeekTargetTime={setSeekTargetTime}
+                            overlayToggles={overlayToggles}
+                            setOverlayToggles={setOverlayToggles}
+                            onUploadAnotherVideo={handleUploadFile}
+                            isUploading={isUploading}
+                            selectedPlayerIds={selectedPlayerIds}
+                            onTogglePlayerSelection={handleTogglePlayerSelection}
+                            highlightedReceiverId={highlightedReceiverId}
+                            onHighlightReceiver={setHighlightedReceiverId}
+                          />
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="video-pane-wrapper" id="video-section">
+                          <VideoPlayer
+                            activeMatch={activeVideo}
+                            intervalStart={intervalStart}
+                            setIntervalStart={handleSetIntervalStart}
+                            intervalEnd={intervalEnd}
+                            setIntervalEnd={handleSetIntervalEnd}
+                            currentTime={currentTime}
+                            setCurrentTime={setCurrentTime}
+                            onDurationDiscovered={handleDurationDiscovered}
+                            onRunAnalysis={runAnalysis}
+                            isAnalyzing={isAnalyzing}
+                            overlayData={overlayData}
+                            analysisResult={analysisResult}
+                            seekTargetTime={seekTargetTime}
+                            setSeekTargetTime={setSeekTargetTime}
+                            overlayToggles={overlayToggles}
+                            setOverlayToggles={setOverlayToggles}
+                            onUploadAnotherVideo={handleUploadFile}
+                            isUploading={isUploading}
+                            selectedPlayerIds={selectedPlayerIds}
+                            onTogglePlayerSelection={handleTogglePlayerSelection}
+                            highlightedReceiverId={highlightedReceiverId}
+                            onHighlightReceiver={setHighlightedReceiverId}
+                          />
+                        </div>
 
-                  <div className="pitch-pane-wrapper" id="pitch-section">
-                    <TacticalPitch
+                        <div className="pitch-pane-wrapper" id="pitch-section">
+                          <TacticalPitch
+                            overlayData={overlayData}
+                            selectedPlayerIds={selectedPlayerIds}
+                            onTogglePlayerSelection={handleTogglePlayerSelection}
+                            onClearSelection={handleClearSelection}
+                            currentTime={currentTime}
+                            highlightedReceiverId={highlightedReceiverId}
+                          />
+                        </div>
+                      </>
+                    )}
+                  </div>
+
+                  {/* Right Column: Pass Lanes, Shooting Lanes & Selected Player Box */}
+                  <div className="right-analysis-column" id="analysis-section">
+                    <ContextualAnalysisPanel
+                      intervalStart={intervalStart}
+                      intervalEnd={intervalEnd}
+                      isAnalyzing={isAnalyzing}
+                      onRunAnalysis={runAnalysis}
+                      onAskCoachAi={askCoachAi}
                       overlayData={overlayData}
+                      currentTime={currentTime}
                       selectedPlayerIds={selectedPlayerIds}
                       onTogglePlayerSelection={handleTogglePlayerSelection}
-                      onClearSelection={handleClearSelection}
-                      currentTime={currentTime}
+                      focusPlayerId={focusPlayerId}
+                      setFocusPlayerId={setFocusPlayerId}
+                      onSeekToTime={handleSeekToTime}
+                      matchSummary={matchSummary}
+                      overlayToggles={overlayToggles}
+                      setOverlayToggles={setOverlayToggles}
                       highlightedReceiverId={highlightedReceiverId}
+                      onHighlightReceiver={setHighlightedReceiverId}
+                      currentMatch={activeVideo}
                     />
                   </div>
                 </div>
-
-                {/* Right Column: Pass Lanes, Shooting Lanes & Selected Player Box */}
-                <div className="right-analysis-column" id="analysis-section">
-                  <ContextualAnalysisPanel
-                    intervalStart={intervalStart}
-                    intervalEnd={intervalEnd}
-                    isAnalyzing={isAnalyzing}
-                    onRunAnalysis={runAnalysis}
-                    onAskCoachAi={askCoachAi}
-                    overlayData={overlayData}
-                    currentTime={currentTime}
-                    selectedPlayerIds={selectedPlayerIds}
-                    onTogglePlayerSelection={handleTogglePlayerSelection}
-                    focusPlayerId={focusPlayerId}
-                    setFocusPlayerId={setFocusPlayerId}
-                    onSeekToTime={handleSeekToTime}
-                    matchSummary={matchSummary}
-                    overlayToggles={overlayToggles}
-                    setOverlayToggles={setOverlayToggles}
-                    highlightedReceiverId={highlightedReceiverId}
-                    onHighlightReceiver={setHighlightedReceiverId}
-                    currentMatch={activeVideo}
-                  />
-                </div>
-              </div>
+              )}
 
               {/* 3. Bottom of the Whole Page: Dedicated Coach AI Analyst & Multi-Pitch 2D Maps */}
               <CoachAILabSection

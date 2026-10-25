@@ -49,9 +49,9 @@ export default function TacticalPitch({
   const innerW = pitchWidth - pad * 2; // 1000
   const innerH = pitchHeight - pad * 2; // 630
 
-  // Coordinate mapping from normalized [0..1] to SVG pixels
-  const toX = (normX) => pad + (normX ?? 0.5) * innerW;
-  const toY = (normY) => pad + (normY ?? 0.5) * innerH;
+  // Coordinate mapping from normalized [0..1] to SVG pixels with boundary clamping
+  const toX = (normX) => pad + Math.max(0.005, Math.min(0.995, normX ?? 0.5)) * innerW;
+  const toY = (normY) => pad + Math.max(0.005, Math.min(0.995, normY ?? 0.5)) * innerH;
 
   // Dynamic team colors from match metadata
   const team0Color = players.find((p) => p.team === 0)?.accent_color || '#00e5ff';

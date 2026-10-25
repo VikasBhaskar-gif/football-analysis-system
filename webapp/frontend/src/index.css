@@ -2752,30 +2752,34 @@ body {
 .pitch-stage-wrapper {
   position: relative;
   width: 100%;
-  background-color: var(--surface-canvas-pitch);
+  background-color: #0b120e;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 440px;
-  max-height: 620px;
+  padding: 12px 14px;
+  box-sizing: border-box;
   overflow: hidden;
-  padding: 8px 12px;
+  border-radius: var(--radius-sm);
 }
 
 .pitch-stage-wrapper.pitch-expanded {
-  min-height: 580px;
-  max-height: 780px;
+  padding: 16px 20px;
 }
 
 .tactical-pitch-svg {
-  width: 100%;
-  max-height: 600px;
+  width: auto;
+  max-width: 100%;
   height: auto;
+  aspect-ratio: 1050 / 680;
+  max-height: min(65vh, 580px);
+  object-fit: contain;
   display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.45));
 }
 
 .pitch-stage-wrapper.pitch-expanded .tactical-pitch-svg {
-  max-height: 760px;
+  max-height: min(85vh, 820px);
 }
 
 .pitch-hover-hud {
