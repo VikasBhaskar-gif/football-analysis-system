@@ -101,9 +101,11 @@ FOOTBALL_ONTOLOGY = {
         "cross": "Wide delivery from the flank or byline into the penalty area.",
         "cutback": "Pass pulled back from near the byline/deep wide box toward the penalty spot or Zone 14.",
         "key_pass": "Pass that directly sets up a teammate's shot attempt within 6 seconds.",
-        "on_ball_dribble": "Active ball carry where the player drives with the ball at their feet.",
+        "pass": "Intentional ball distribution from a player to a teammate (cls == 2 or 3). A pass is completed when it reaches a teammate of the same team without an opponent interception.",
+        "shot": "Explicit attempt to score a goal directed at the opponent's goalmouth frame (cls == 5). Passes, crosses, and through balls near the penalty area are strictly classified as passes, never as shots.",
+        "on_ball_dribble": "Active 1v1 take-on where the ball carrier engages an opposing defender. A dribble is COMPLETED only when the player gets past his man properly in the direction towards the opponent's goal and retains possession.",
         "progressive_carry": "On-ball dribble/carry that advances the ball >=5m closer to the opponent's goal.",
-        "on_ball_1v1_duel": "Direct 1v1 confrontation where the attacker HAS POSSESSION OF THE BALL and engages a defender within <=6.5m.",
+        "on_ball_1v1_duel": "Direct on-ball confrontation between an attacker in possession and an opposing defender. The defender WINS the duel ONLY when he wins the ball back for his team from the opponent (turnover, tackle, dispossession, recovery). If the defender merely contains and the attacker recycles possession to a teammate, the defender has contained the attack but has not won the duel.",
         "optimal_shot": "Shot taken with a clear goal corridor and high angle where no teammate had a significantly higher-probability open pass lane.",
         "suboptimal_shot": "Shot taken into blockers or from a worse angle/distance while a teammate was open in a superior scoring position with a clear pass lane.",
         "half_space": "Interior vertical channel between the wide wing and central corridor (y in [14m..25m] or [43m..54m]).",
@@ -1237,6 +1239,31 @@ Guidelines:
                     if nxt is not None and (nxt["frame"] - ev["frame"]) <= 90 and nxt["team_id"] != t_id:
                         kept_ball = False
 
+                    # Check opponent defender proximity around start of carry
+                    has_challenger = False
+                    opp_at_start = None
+                    min_opp_d_m = 99.0
+                    start_f = wf[pm][0] if np.any(pm) else ev["frame"]
+                    s_opp_mask = (wf == start_f) & (wt != t_id) & (~np.isnan(wx)) & (~np.isnan(wy))
+                    if np.any(s_opp_mask):
+                        for owx, owy in zip(wx[s_opp_mask], wy[s_opp_mask]):
+                            d_m = math.hypot((float(owx) - sx_r) * PITCH_LENGTH_M, (float(owy) - sy_r) * PITCH_WIDTH_M)
+                            if d_m < min_opp_d_m:
+                                min_opp_d_m = d_m
+                                opp_at_start = (float(owx), float(owy))
+
+                    if min_opp_d_m <= 4.5 and opp_at_start is not None:
+                        has_challenger = True
+
+                    # Coaching Rule: A player completes a dribble ONLY when getting past his man properly
+                    # in the direction towards his opponent's goal while retaining possession!
+                    is_completed_dribble = False
+                    if has_challenger and opp_at_start is not None:
+                        rel_start_m = (sx_r - opp_at_start[0]) * PITCH_LENGTH_M * att_dir
+                        rel_end_m = (ex_r - opp_at_start[0]) * PITCH_LENGTH_M * att_dir
+                        if (carry_prog_m >= 0.8) and (rel_start_m <= 0.6) and (rel_end_m >= 0.3) and kept_ball:
+                            is_completed_dribble = True
+
                     sx_disp = (1.0 - sx_r) if flip else sx_r
                     sy_disp = (1.0 - sy_r) if flip else sy_r
                     ex_disp = (1.0 - ex_r) if flip else ex_r
@@ -1248,7 +1275,9 @@ Guidelines:
                         "timestamp_s": ts_s,
                         "clock": _format_match_clock(ts_s),
                         "half": half_label,
-                        "succeeded": kept_ball,
+                        "is_take_on": has_challenger,
+                        "succeeded": is_completed_dribble if has_challenger else kept_ball,
+                        "got_past_defender": is_completed_dribble,
                         "is_progressive": kept_ball and carry_prog_m >= 5.0,
                         "carry_distance_m": round(max(1.5, carry_dist_m), 1),
                         "progression_m": round(carry_prog_m, 1),
@@ -1272,9 +1301,14 @@ Guidelines:
         cutbacks = [p for p in passes_list if p["is_cutback"]]
         key_passes = [p for p in passes_list if p["is_key_pass"]]
 
-        total_dribbles = len(dribbles_list)
-        succ_dribbles = [d for d in dribbles_list if d["succeeded"]]
+        take_ons = [d for d in dribbles_list if d.get("is_take_on", False)]
+        succ_take_ons = [d for d in take_ons if d["succeeded"]]
+        open_carries = [d for d in dribbles_list if not d.get("is_take_on", False)]
         prog_carries = [d for d in dribbles_list if d["is_progressive"]]
+
+        total_take_ons = len(take_ons)
+        succ_dribbles_count = len(succ_take_ons)
+        dribble_success_pct = round((succ_dribbles_count / max(1, total_take_ons)) * 100.0, 1) if total_take_ons else 0.0
 
         top_receivers = sorted(receivers_tally.values(), key=lambda x: x["count"], reverse=True)[:5]
 
@@ -1301,10 +1335,13 @@ Guidelines:
             "cutbacks_completed": len(cutbacks),
             "key_passes": len(key_passes),
             "top_receivers": top_receivers,
-            "on_ball_dribbles_total": total_dribbles,
-            "on_ball_dribbles_succeeded": len(succ_dribbles),
-            "on_ball_dribbles_failed": total_dribbles - len(succ_dribbles),
-            "dribble_success_pct": round((len(succ_dribbles) / max(1, total_dribbles)) * 100.0, 1) if total_dribbles else 0.0,
+            "on_ball_dribbles_total": total_take_ons if total_take_ons > 0 else len(dribbles_list),
+            "on_ball_dribbles_succeeded": succ_dribbles_count if total_take_ons > 0 else sum(1 for d in dribbles_list if d["succeeded"]),
+            "on_ball_dribbles_failed": (total_take_ons - succ_dribbles_count) if total_take_ons > 0 else (len(dribbles_list) - sum(1 for d in dribbles_list if d["succeeded"])),
+            "dribble_success_pct": dribble_success_pct if total_take_ons > 0 else round((sum(1 for d in dribbles_list if d["succeeded"]) / max(1, len(dribbles_list))) * 100.0, 1),
+            "direct_take_ons_total": total_take_ons,
+            "direct_take_ons_succeeded": succ_dribbles_count,
+            "open_field_carries_count": len(open_carries),
             "progressive_carries_count": len(prog_carries),
             "total_carry_distance_m": round(sum(d["carry_distance_m"] for d in dribbles_list), 1),
             "passes_events": passes_list,
@@ -1922,17 +1959,17 @@ Guidelines:
                 p1_duel_speeds.append(p1_peak_kmh)
                 p2_duel_speeds.append(p2_peak_kmh)
 
-                # Did P1 succeed in this on-ball 1v1 duel against P2?
-                # Success = P1 kept possession for their team (not tackled/blocked/intercepted)
-                # AND (beat/progressed forward >= 1.2m, or ended ahead of defender rel_after_m >= -0.5m, or got a shot off)
-                def_tackled_or_won = (nxt_team != t1_id) or (nxt_cls in (7, 8))
+                # Coaching Rule:
+                # - Attacker completes a dribble ONLY when getting past his man properly in the direction
+                #   towards his opponent's goal while keeping possession.
+                # - Defender WINS the duel ONLY when he wins the ball back for his team from the opponent.
+                # - If defender contains and attacker recycles possession to a teammate, it is a containment (not a duel won).
+                def_won_ball = (nxt_team != t1_id) or (nxt_cls in (7, 8))
                 got_past = (
-                    (not def_tackled_or_won)
+                    (not def_won_ball)
                     and (
-                        prog_m >= 1.2
-                        or depth_gained_vs_def_m >= 1.0
-                        or rel_after_m >= -0.5
-                        or (5 in spell_acts)
+                        (prog_m >= 0.8 and rel_before_m <= 0.6 and rel_after_m >= 0.3 and depth_gained_vs_def_m > 0)
+                        or (5 in spell_acts and prog_m >= 0.5)
                     )
                 )
 
@@ -1942,13 +1979,21 @@ Guidelines:
                 p2_last = p2_meta["name"].split()[-1]
 
                 act_desc = "Dribble Drive" if 1 in spell_acts else ("Shot" if 5 in spell_acts else ("Cross" if 3 in spell_acts else "On-Ball Touch"))
-                if got_past:
-                    outcome_label = f"1v1 Success: {p1_last} Beat {p2_last} on the Ball ({act_desc}, {prog_m:+.1f}m)"
+                if def_won_ball:
+                    winner_name = p2_meta["name"]
+                    winner_side = "defender"
+                    duel_outcome_type = "defender_won_ball"
+                    outcome_label = f"1v1 Duel Won: {p2_last} Won Ball Back from {p1_last} ({act_desc})"
+                elif got_past:
+                    winner_name = p1_meta["name"]
+                    winner_side = "attacker"
+                    duel_outcome_type = "attacker_beat_defender"
+                    outcome_label = f"1v1 Dribble Complete: {p1_last} Beat {p2_last} Towards Goal ({act_desc}, {prog_m:+.1f}m)"
                 else:
-                    if nxt_team != t1_id:
-                        outcome_label = f"1v1 Failure: {p2_last} Won Turnover / Dispossessed {p1_last}"
-                    else:
-                        outcome_label = f"1v1 Failure: {p2_last} Contained {p1_last} (Forced Recycle {prog_m:+.1f}m)"
+                    winner_name = "None (Contained)"
+                    winner_side = "contained"
+                    duel_outcome_type = "contained_recycle"
+                    outcome_label = f"1v1 Containment: {p2_last} Contained {p1_last} (Ball Recycled {prog_m:+.1f}m)"
 
                 dribble_episodes.append({
                     "raw_frame": f_start,
@@ -1960,10 +2005,12 @@ Guidelines:
                     "progression_m": round(prog_m, 1),
                     "depth_gained_vs_defender_m": round(depth_gained_vs_def_m, 1),
                     "got_past": bool(got_past),
+                    "def_won_ball": bool(def_won_ball),
+                    "duel_outcome_type": duel_outcome_type,
                     "on_ball_verified": True,
                     "action_type": act_desc,
-                    "winner": p1_meta["name"] if got_past else p2_meta["name"],
-                    "winner_side": "attacker" if got_past else "defender",
+                    "winner": winner_name,
+                    "winner_side": winner_side,
                     "outcome": outcome_label,
                     "p1_speed_kmh": p1_peak_kmh,
                     "p2_speed_kmh": p2_peak_kmh,
@@ -2011,9 +2058,12 @@ Guidelines:
         p2_top_kmh = max(p2_top_kmh, h2h_p2_peak)
 
         completed_dribbles = [ep for ep in dribble_episodes if ep["got_past"]]
-        contained_dribbles = [ep for ep in dribble_episodes if not ep["got_past"]]
+        defender_duels_won = [ep for ep in dribble_episodes if ep.get("duel_outcome_type") == "defender_won_ball"]
+        contained_dribbles = [ep for ep in dribble_episodes if ep.get("duel_outcome_type") == "contained_recycle"]
         total_duels = len(dribble_episodes)
         completed_count = len(completed_dribbles)
+        def_duels_won_count = len(defender_duels_won)
+        contained_count = len(contained_dribbles)
         p1_faster_duels = sum(1 for ep in dribble_episodes if ep["p1_speed_kmh"] > ep["p2_speed_kmh"])
 
         speed_comparison = {
@@ -2060,9 +2110,13 @@ Guidelines:
             "total_1v1_duels": total_duels,
             "dribbles_completed_got_past": completed_count,
             "attacker_wins": completed_count,
-            "defender_containments": len(contained_dribbles),
+            "defender_duels_won": def_duels_won_count,
+            "defender_containments": contained_count,
+            "defender_total_stops": def_duels_won_count + contained_count,
             "attacker_success_pct": round((completed_count / max(1, total_duels)) * 100.0, 1) if total_duels else 0.0,
-            "defender_containment_pct": round((len(contained_dribbles) / max(1, total_duels)) * 100.0, 1) if total_duels else 0.0,
+            "defender_duels_won_pct": round((def_duels_won_count / max(1, total_duels)) * 100.0, 1) if total_duels else 0.0,
+            "defender_containment_pct": round((contained_count / max(1, total_duels)) * 100.0, 1) if total_duels else 0.0,
+            "defender_stop_pct": round(((def_duels_won_count + contained_count) / max(1, total_duels)) * 100.0, 1) if total_duels else 0.0,
             "engaged_time_s": round(engaged_frames_count / fps, 1),
             "shared_pitch_time_min": round((shared_pitch_frames / fps) / 60.0, 1),
             "avg_matchup_distance_m": round(float(np.mean(all_pair_dists)), 1) if all_pair_dists else None,
@@ -2313,10 +2367,10 @@ Guidelines:
         fps: float,
     ) -> Dict[str, Any]:
         """
-        Audits all shots (cls == 5) AND penalty-box / danger-zone strike situations (<=23m from goal)
-        for `target_player` (or the whole match if `target_player` is None).
+        Audits all direct shots (cls == 5) directed at the goal frame for `target_player`
+        (or the whole match if `target_player` is None). Passes and carries are strictly excluded.
         Separates them into:
-          - Optimal Shots (clear lane / best available option)
+          - Optimal Shots (clear lane / best available scoring option)
           - Non-Optimal / Sub-Optimal Shots (blocked corridor or an open teammate had a better pass & goal angle)
         """
         rosters = self._resolve_match_rosters(base_match)
@@ -2339,11 +2393,10 @@ Guidelines:
             cls = ht["cls"][mask]
 
             if target_player is not None:
-                # For a specific player, include both cls == 5 direct shots AND on-ball box strikes/actions within 23m of goal
+                # Strict: Only cls == 5 represents a direct shot attempt on the goal frame.
+                # Passes (cls 2, 3) and carries (cls 1) are never counted as shots regardless of proximity to goal.
                 p_mask = (teams == target_player["team_id"]) & (shirts == target_player["shirt"]) & (~np.isnan(px)) & (~np.isnan(py))
-                goal_x_arr = np.where(sides == 0, 1.0, 0.0)
-                dist_goal_arr = np.hypot((goal_x_arr - px) * PITCH_LENGTH_M, (0.5 - py) * PITCH_WIDTH_M)
-                shot_mask = p_mask & ((cls == 5) | (np.isin(cls, [1, 2, 3]) & (dist_goal_arr <= 23.0)))
+                shot_mask = p_mask & (cls == 5)
             else:
                 shot_mask = (cls == 5) & (~np.isnan(px)) & (~np.isnan(py)) & (shirts > 0)
 
@@ -3523,9 +3576,9 @@ Guidelines:
                     f"{pd_rep['long_balls_completed']}/{pd_rep['long_balls_attempted']} long balls (>=25m), "
                     f"{pd_rep['crosses_completed']}/{pd_rep['crosses_attempted']} crosses, and {pd_rep['key_passes']} key passes"
                     f"{f' (top receivers: {top_rec_str})' if top_rec_str else ''}. "
-                    f"On the ball, {p1_last} executed {pd_rep['on_ball_dribbles_total']} ball carries/dribbles, succeeding in "
-                    f"{pd_rep['on_ball_dribbles_succeeded']} ({pd_rep['dribble_success_pct']}%) with {pd_rep['progressive_carries_count']} progressive carries "
-                    f"covering {pd_rep['total_carry_distance_m']}m."
+                    f"In 1v1 situations against defenders, {p1_last} engaged in {pd_rep['on_ball_dribbles_total']} direct take-ons, successfully getting past his man "
+                    f"towards the opponent goal in {pd_rep['on_ball_dribbles_succeeded']} ({pd_rep['dribble_success_pct']}%), alongside {pd_rep['open_field_carries_count']} open-field carries "
+                    f"({pd_rep['progressive_carries_count']} progressive, covering {pd_rep['total_carry_distance_m']}m total)."
                 )
 
             # Bullet B: Strict On-Ball 1v1 Duels against EACH Mentioned Defender (Lascelles, Trippier, etc.)
@@ -3536,9 +3589,9 @@ Guidelines:
                 sc = h2h["speed_comparison"]
                 narrative_bullets.append(
                     f"Strict On-Ball 1v1 Duels ({p1_last} with the Ball vs {def_short}): When {p1_last} was the active ball carrier, "
-                    f"he engaged {def_short} in {h2h['total_1v1_duels']} direct on-ball 1v1 duels — recording "
-                    f"{h2h['attacker_wins']} successes ({h2h['attacker_success_pct']}% where {p1_last} beat/progressed past {def_last} on the ball) "
-                    f"and {h2h['defender_containments']} failures ({h2h['defender_containment_pct']}% where {def_last} contained him, forced a backward recycle, or won a turnover). "
+                    f"he engaged {def_short} in {h2h['total_1v1_duels']} direct on-ball 1v1 duels — {p1_last} beat/progressed past {def_last} towards goal in "
+                    f"{h2h['attacker_wins']} ({h2h['attacker_success_pct']}%), {def_last} won the ball back for his team in {h2h['defender_duels_won']} ({h2h['defender_duels_won_pct']}%), "
+                    f"and {def_last} contained {p1_last} forcing a backward/sideways recycle in {h2h['defender_containments']} ({h2h['defender_containment_pct']}%). "
                     f"(Peak speed: {p1_last} {sc['p1_top_speed_kmh']} km/h vs {def_last} {sc['p2_top_speed_kmh']} km/h; "
                     f"1v1 duel avg speed: {sc['p1_h2h_avg_kmh']} vs {sc['p2_h2h_avg_kmh']} km/h)."
                 )
@@ -3552,8 +3605,8 @@ Guidelines:
                 ][:3]
                 subopt_str = f" Key non-optimal moments: {'; '.join(subopt_examples)}." if subopt_examples else ""
                 narrative_bullets.append(
-                    f"Shot Map & Decision Audit ({p1_short}): {p1_last} registered {shot_audit['total_shots']} shot / penalty-box strike actions — "
-                    f"{shot_audit['optimal_shots_count']} Optimal Shots (best available option / clear lane) and "
+                    f"Shot Map & Decision Audit ({p1_short}): {p1_last} registered {shot_audit['total_shots']} direct shot attempts on goal — "
+                    f"{shot_audit['optimal_shots_count']} Optimal Shots (clear lane / best available scoring option) and "
                     f"{shot_audit['suboptimal_shots_count']} Non-Optimal Shots ({shot_audit['decision_efficiency_pct']}% decision efficiency).{subopt_str}"
                 )
 
@@ -3586,24 +3639,24 @@ Guidelines:
                 })
             if reqs["wants_dribbles"]:
                 comparison_cards.append({
-                    "label": f"{p1_last} On-Ball Dribbles",
-                    "value": f"{pd_rep['on_ball_dribbles_succeeded']} / {pd_rep['on_ball_dribbles_total']} ({pd_rep['dribble_success_pct']}%)",
-                    "sub": f"{pd_rep['progressive_carries_count']} progressive carries • {pd_rep['total_carry_distance_m']}m carried",
+                    "label": f"{p1_last} Direct Take-Ons",
+                    "value": f"{pd_rep['on_ball_dribbles_succeeded']} / {pd_rep['on_ball_dribbles_total']} Beat Man ({pd_rep['dribble_success_pct']}%)",
+                    "sub": f"{pd_rep['open_field_carries_count']} open-field carries • {pd_rep['progressive_carries_count']} progressive ({pd_rep['total_carry_distance_m']}m total)",
                     "color": "#0284c7",
                 })
             for h2h in duels_list:
                 def_last = h2h["defender"]["name"].split()[-1]
                 comparison_cards.append({
                     "label": f"On-Ball 1v1 vs #{h2h['defender']['shirt']} {def_last}",
-                    "value": f"{h2h['attacker_wins']} Won / {h2h['defender_containments']} Lost",
-                    "sub": f"{h2h['total_1v1_duels']} on-ball 1v1s ({h2h['attacker_success_pct']}% success vs {def_last})",
+                    "value": f"{h2h['attacker_wins']} Beat Man / {h2h['defender_duels_won']} Won Ball",
+                    "sub": f"{h2h['total_1v1_duels']} duels • {h2h['defender_containments']} contained ({h2h['attacker_success_pct']}% beat defender)",
                     "color": "#16a34a",
                 })
             if shot_audit is not None:
                 comparison_cards.append({
                     "label": f"{p1_last} Shot Decision Audit",
                     "value": f"{shot_audit['optimal_shots_count']} Optimal / {shot_audit['suboptimal_shots_count']} Non-Optimal",
-                    "sub": f"{shot_audit['total_shots']} total shot/box strikes ({shot_audit['decision_efficiency_pct']}% optimal)",
+                    "sub": f"{shot_audit['total_shots']} total direct shots on goal ({shot_audit['decision_efficiency_pct']}% optimal)",
                     "color": "#dc2626",
                 })
             if reqs["wants_speed"] and duel_1v1 is not None:

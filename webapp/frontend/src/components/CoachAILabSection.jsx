@@ -122,6 +122,9 @@ function AIPitchCanvas({
             <marker id="aiArrowAmber" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
               <path d="M0,0 L6,3 L0,6 Z" fill="#f59e0b" />
             </marker>
+            <marker id="aiArrowRed" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#ef4444" />
+            </marker>
           </defs>
 
           {/* Pitch Turf & Mow Stripes */}
@@ -806,8 +809,9 @@ export default function CoachAILabSection({
                       isExpanded={expandedPitchId === pm.id}
                       onToggleExpand={() => handleToggleExpand(pm.id)}
                       legendItems={[
-                        { color: '#fde047', label: `${dd.attacker.name.split(' ').pop()} Got Past ${dd.defender.name.split(' ').pop()}` },
-                        { color: '#38bdf8', label: `${dd.defender.name.split(' ').pop()} Contained` },
+                        { color: '#fde047', label: `${dd.attacker.name.split(' ').pop()} Got Past (Dribble Complete)` },
+                        { color: '#ef4444', label: `${dd.defender.name.split(' ').pop()} Won Ball Back (Duel Won)` },
+                        { color: '#38bdf8', label: `${dd.defender.name.split(' ').pop()} Contained (Recycled)` },
                       ]}
                       footerNote="Click any 1v1 marker or trajectory vector on the pitch to watch that exact duel in the video player."
                     >
@@ -819,7 +823,9 @@ export default function CoachAILabSection({
                             const ex = toX(ep.end_x ?? ep.x_norm);
                             const ey = toY(ep.end_y ?? ep.y_norm);
                             const gotPast = ep.got_past || ep.winner_side === 'attacker';
-                            const col = gotPast ? '#fde047' : '#38bdf8';
+                            const defWonBall = ep.def_won_ball || ep.winner_side === 'defender';
+                            const col = gotPast ? '#fde047' : (defWonBall ? '#ef4444' : '#38bdf8');
+                            const markerUri = gotPast ? 'url(#aiArrowGold)' : (defWonBall ? 'url(#aiArrowRed)' : 'url(#aiArrowCyan)');
 
                             return (
                               <g
@@ -835,7 +841,7 @@ export default function CoachAILabSection({
                                   stroke={col}
                                   strokeWidth={gotPast ? '3.4' : '2.2'}
                                   strokeDasharray={gotPast ? 'none' : '5 3'}
-                                  markerEnd={gotPast ? 'url(#aiArrowGold)' : 'url(#aiArrowCyan)'}
+                                  markerEnd={markerUri}
                                 />
                                 <circle cx={sx} cy={sy} r={gotPast ? '9' : '7'} fill={col} stroke="#0f172a" strokeWidth="2" />
                                 <rect
@@ -1213,8 +1219,8 @@ export default function CoachAILabSection({
                     <tr>
                       <th>Matchup (Attacker with Ball vs Defender)</th>
                       <th>On-Ball 1v1 Duels</th>
-                      <th>1v1 Successes (Beat / Progressed)</th>
-                      <th>1v1 Failures (Contained / Turnover)</th>
+                      <th>Attacker Beat Man (Dribble Complete)</th>
+                      <th>Defender Stops (Ball Won / Contained)</th>
                       <th>Peak Speed (90m)</th>
                       <th>1v1 Duel Avg Speed</th>
                     </tr>
@@ -1229,10 +1235,16 @@ export default function CoachAILabSection({
                           </td>
                           <td><strong>{dItem.total_1v1_duels}</strong> on-ball duels</td>
                           <td style={{ color: '#16a34a', fontWeight: 700 }}>
-                            {dItem.attacker_wins} Won ({dItem.attacker_success_pct}%)
+                            {dItem.attacker_wins} Beat Man ({dItem.attacker_success_pct}%)
                           </td>
                           <td style={{ color: '#dc2626', fontWeight: 700 }}>
-                            {dItem.defender_containments} Lost ({dItem.defender_containment_pct}%)
+                            {dItem.defender_duels_won != null ? (
+                              <span>
+                                {dItem.defender_duels_won} Won Ball ({dItem.defender_duels_won_pct}%) • {dItem.defender_containments} Contained
+                              </span>
+                            ) : (
+                              <span>{dItem.defender_containments} Lost ({dItem.defender_containment_pct}%)</span>
+                            )}
                           </td>
                           <td>{sc.p1_top_speed_kmh} vs {sc.p2_top_speed_kmh} km/h</td>
                           <td>{sc.p1_h2h_avg_kmh} vs {sc.p2_h2h_avg_kmh} km/h</td>

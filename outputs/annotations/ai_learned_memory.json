@@ -1,7 +1,7 @@
 {
-  "total_queries": 199,
-  "model_version": 186,
-  "ontology_terms_count": 34,
+  "total_queries": 211,
+  "model_version": 198,
+  "ontology_terms_count": 36,
   "football_ontology": {
     "switch_of_play": "Cross-field pass that shifts the ball laterally across the pitch (>=20m width change, e.g. from one wing/half-space to the opposite flank).",
     "long_ball": "Pass or distribution traveling >=25m (approx. 28+ yards) across the pitch.",
@@ -12,9 +12,11 @@
     "cross": "Wide delivery from the flank or byline into the penalty area.",
     "cutback": "Pass pulled back from near the byline/deep wide box toward the penalty spot or Zone 14.",
     "key_pass": "Pass that directly sets up a teammate's shot attempt within 6 seconds.",
-    "on_ball_dribble": "Active ball carry where the player drives with the ball at their feet.",
+    "pass": "Intentional ball distribution from a player to a teammate (cls == 2 or 3). A pass is completed when it reaches a teammate of the same team without an opponent interception.",
+    "shot": "Explicit attempt to score a goal directed at the opponent's goalmouth frame (cls == 5). Passes, crosses, and through balls near the penalty area are strictly classified as passes, never as shots.",
+    "on_ball_dribble": "Active 1v1 take-on where the ball carrier engages an opposing defender. A dribble is COMPLETED only when the player gets past his man properly in the direction towards the opponent's goal and retains possession.",
     "progressive_carry": "On-ball dribble/carry that advances the ball >=5m closer to the opponent's goal.",
-    "on_ball_1v1_duel": "Direct 1v1 confrontation where the attacker HAS POSSESSION OF THE BALL and engages a defender within <=6.5m.",
+    "on_ball_1v1_duel": "Direct on-ball confrontation between an attacker in possession and an opposing defender. The defender WINS the duel ONLY when he wins the ball back for his team from the opponent (turnover, tackle, dispossession, recovery). If the defender merely contains and the attacker recycles possession to a teammate, the defender has contained the attack but has not won the duel.",
     "optimal_shot": "Shot taken with a clear goal corridor and high angle where no teammate had a significantly higher-probability open pass lane.",
     "suboptimal_shot": "Shot taken into blockers or from a worse angle/distance while a teammate was open in a superior scoring position with a clear pass lane.",
     "half_space": "Interior vertical channel between the wide wing and central corridor (y in [14m..25m] or [43m..54m]).",
@@ -48,14 +50,14 @@
     "runs": 6,
     "overlaps": 5,
     "defenders": 5,
-    "wants_heatmap": 17,
-    "wants_1v1_duels": 22,
-    "wants_dribbles": 16,
-    "wants_passes": 96,
-    "wants_shots": 34,
+    "wants_heatmap": 20,
+    "wants_1v1_duels": 24,
+    "wants_dribbles": 19,
+    "wants_passes": 100,
+    "wants_shots": 40,
     "wants_switches_or_long_balls": 15,
-    "wants_defensive_line": 42,
-    "wants_team_shape": 42,
+    "wants_defensive_line": 48,
+    "wants_team_shape": 48,
     "wants_all_games": 11,
     "wants_aerial": 15,
     "wants_speed": 9,
@@ -89,19 +91,27 @@
     "Ferran Torres": 7,
     "Raphinha": 1,
     "Jo\u00e3o F\u00e9lix": 4,
-    "Lamine Yamal": 1,
+    "Lamine Yamal": 6,
     "Jonathan Bamba": 1,
-    "Gavi": 5,
+    "Gavi": 7,
     "Jo\u00e3o Cancelo": 7,
-    "Jamal Musiala": 17,
-    "Bruno Fernandes": 1,
+    "Jamal Musiala": 18,
+    "Bruno Fernandes": 2,
     "Marcus Rashford": 3,
     "Dayot Upamecano": 3,
     "Achraf Hakimi": 6,
     "Robert Lewandowski": 12,
     "Iago Aspas": 9,
     "J\u00f8rgen Strand Larsen": 3,
-    "Carl Starfelt": 3
+    "Carl Starfelt": 3,
+    "Joshua Kimmich": 1,
+    "Leon Goretzka": 1,
+    "Thomas M\u00fcller": 1,
+    "Christian Eriksen": 1,
+    "Casemiro": 1,
+    "Scott McTominay": 1,
+    "Hannibal Mejbri": 1,
+    "Mihailo Risti\u0107": 2
   },
   "learned_matchup_signatures": {
     "Kylian Mbapp\u00e9 vs Kieran Trippier": {
@@ -217,7 +227,7 @@
       }
     },
     "Gavi": {
-      "updated_at": "2026-10-24 11:35:00",
+      "updated_at": "2026-10-26 00:47:20",
       "scope": "full_match",
       "facts": {
         "player": "Gavi",
@@ -436,6 +446,44 @@
           "Carl Starfelt": "1/5 won"
         }
       }
+    },
+    "Joshua Kimmich vs Leon Goretzka vs Thomas M\u00fcller vs Jamal Musiala vs Bruno Fernandes vs Christian Eriksen vs Casemiro vs Scott McTominay vs Hannibal Mejbri": {
+      "updated_at": "2026-10-26 00:48:43",
+      "scope": "full_match",
+      "facts": {
+        "player": "Joshua Kimmich",
+        "passes_completed": "58/65",
+        "on_ball_dribbles": "44/48",
+        "on_ball_1v1_matchups": {
+          "Bruno Fernandes": "18/27 won",
+          "Christian Eriksen": "8/15 won",
+          "Casemiro": "9/15 won",
+          "Scott McTominay": "7/15 won",
+          "Hannibal Mejbri": "0/0 won"
+        }
+      }
+    },
+    "Lamine Yamal": {
+      "updated_at": "2026-10-26 01:04:42",
+      "scope": "full_match",
+      "facts": {
+        "player": "Lamine Yamal",
+        "passes_completed": "12/16",
+        "on_ball_dribbles": "0/1",
+        "on_ball_1v1_matchups": {}
+      }
+    },
+    "Lamine Yamal vs Mihailo Risti\u0107": {
+      "updated_at": "2026-10-26 01:05:15",
+      "scope": "full_match",
+      "facts": {
+        "player": "Lamine Yamal",
+        "passes_completed": "11/12",
+        "on_ball_dribbles": "0/4",
+        "on_ball_1v1_matchups": {
+          "Mihailo Risti\u0107": "1/16 won"
+        }
+      }
     }
   },
   "learned_vocabulary": {
@@ -448,9 +496,9 @@
       "shots": 4,
       "wants_heatmap": 6,
       "wants_1v1_duels": 14,
-      "wants_dribbles": 14,
-      "wants_passes": 6,
-      "wants_shots": 6
+      "wants_dribbles": 15,
+      "wants_passes": 7,
+      "wants_shots": 7
     },
     "mbappe": {
       "dribbles": 8,
@@ -491,11 +539,11 @@
       "heatmap": 7,
       "passes": 4,
       "shots": 4,
-      "wants_heatmap": 6,
-      "wants_1v1_duels": 17,
-      "wants_dribbles": 10,
-      "wants_passes": 6,
-      "wants_shots": 7,
+      "wants_heatmap": 7,
+      "wants_1v1_duels": 19,
+      "wants_dribbles": 12,
+      "wants_passes": 8,
+      "wants_shots": 9,
       "wants_defensive_line": 9,
       "wants_team_shape": 9
     },
@@ -582,11 +630,11 @@
       "heatmap": 4,
       "passes": 8,
       "shots": 4,
-      "wants_heatmap": 7,
+      "wants_heatmap": 9,
       "wants_1v1_duels": 6,
-      "wants_dribbles": 6,
-      "wants_passes": 36,
-      "wants_shots": 6,
+      "wants_dribbles": 7,
+      "wants_passes": 39,
+      "wants_shots": 7,
       "is_teammate_query": 23,
       "wants_teammates_pass_combo": 23,
       "wants_speed": 2,
@@ -684,12 +732,17 @@
       "wants_dribbles": 6,
       "wants_passes": 8,
       "wants_shots": 6,
-      "wants_switches_or_long_balls": 2
+      "wants_switches_or_long_balls": 2,
+      "wants_defensive_line": 2,
+      "wants_team_shape": 2
     },
     "which": {
       "speed": 1,
       "runs": 1,
-      "passes": 1
+      "passes": 1,
+      "wants_shots": 1,
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
     },
     "players": {
       "speed": 1,
@@ -773,12 +826,17 @@
       "passes": 1,
       "wants_passes": 14,
       "wants_switches_or_long_balls": 14,
-      "wants_runs": 1
+      "wants_runs": 1,
+      "wants_shots": 1,
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
     },
     "other": {
       "passes": 2,
       "wants_passes": 1,
-      "wants_switches_or_long_balls": 1
+      "wants_switches_or_long_balls": 1,
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
     },
     "into": {
       "passes": 2,
@@ -852,11 +910,11 @@
       "defenders": 3
     },
     "duels": {
-      "wants_heatmap": 2,
-      "wants_1v1_duels": 8,
-      "wants_dribbles": 2,
-      "wants_passes": 2,
-      "wants_shots": 2
+      "wants_heatmap": 3,
+      "wants_1v1_duels": 10,
+      "wants_dribbles": 3,
+      "wants_passes": 3,
+      "wants_shots": 3
     },
     "both": {
       "wants_heatmap": 2,
@@ -924,8 +982,8 @@
     },
     "team": {
       "wants_passes": 8,
-      "wants_defensive_line": 18,
-      "wants_team_shape": 18,
+      "wants_defensive_line": 20,
+      "wants_team_shape": 20,
       "wants_all_games": 10,
       "wants_aerial": 8,
       "wants_speed": 1
@@ -990,8 +1048,8 @@
     },
     "shape": {
       "wants_1v1_duels": 1,
-      "wants_defensive_line": 16,
-      "wants_team_shape": 16
+      "wants_defensive_line": 17,
+      "wants_team_shape": 17
     },
     "defensive": {
       "wants_1v1_duels": 1,
@@ -1029,11 +1087,13 @@
       "wants_dangerous_runs": 4
     },
     "make": {
-      "wants_passes": 4,
+      "wants_passes": 5,
       "wants_speed": 4,
       "wants_runs": 4,
       "wants_aerial": 4,
-      "wants_dangerous_runs": 4
+      "wants_dangerous_runs": 4,
+      "wants_dribbles": 1,
+      "wants_shots": 1
     },
     "dangerous": {
       "wants_passes": 4,
@@ -1107,15 +1167,21 @@
     },
     "celta": {
       "wants_defensive_line": 5,
-      "wants_team_shape": 5
+      "wants_team_shape": 5,
+      "wants_dribbles": 1,
+      "wants_passes": 1,
+      "wants_shots": 1
     },
     "vigo": {
       "wants_defensive_line": 5,
-      "wants_team_shape": 5
+      "wants_team_shape": 5,
+      "wants_dribbles": 1,
+      "wants_passes": 1,
+      "wants_shots": 1
     },
     "backline": {
-      "wants_defensive_line": 6,
-      "wants_team_shape": 6
+      "wants_defensive_line": 8,
+      "wants_team_shape": 8
     },
     "width": {
       "wants_defensive_line": 1,
@@ -1152,9 +1218,9 @@
     "shots": {
       "wants_heatmap": 1,
       "wants_1v1_duels": 1,
-      "wants_dribbles": 1,
-      "wants_passes": 1,
-      "wants_shots": 4
+      "wants_dribbles": 2,
+      "wants_passes": 2,
+      "wants_shots": 5
     },
     "statistics": {
       "wants_passes": 1,
@@ -1182,10 +1248,11 @@
       "wants_switches_or_long_balls": 1
     },
     "gavi": {
-      "wants_passes": 5,
+      "wants_passes": 6,
       "wants_switches_or_long_balls": 1,
       "is_teammate_query": 3,
-      "wants_teammates_pass_combo": 3
+      "wants_teammates_pass_combo": 3,
+      "wants_heatmap": 1
     },
     "cancelo": {
       "wants_passes": 4,
@@ -1206,9 +1273,10 @@
     },
     "game": {
       "wants_passes": 2,
-      "wants_defensive_line": 1,
-      "wants_team_shape": 1,
-      "wants_heatmap": 1
+      "wants_defensive_line": 3,
+      "wants_team_shape": 3,
+      "wants_heatmap": 1,
+      "wants_shots": 2
     },
     "forward": {
       "wants_passes": 1
@@ -1431,8 +1499,13 @@
       "wants_aerial": 2
     },
     "analyze": {
-      "wants_defensive_line": 1,
-      "wants_team_shape": 1
+      "wants_defensive_line": 2,
+      "wants_team_shape": 2,
+      "wants_heatmap": 1,
+      "wants_dribbles": 1,
+      "wants_passes": 1,
+      "wants_shots": 1,
+      "wants_1v1_duels": 2
     },
     "vulnerable": {
       "wants_defensive_line": 1,
@@ -1510,12 +1583,325 @@
       "wants_shots": 1,
       "wants_defensive_line": 1,
       "wants_team_shape": 1
+    },
+    "shaped": {
+      "wants_defensive_line": 2,
+      "wants_team_shape": 2
+    },
+    "possession": {
+      "wants_defensive_line": 3,
+      "wants_team_shape": 3,
+      "wants_shots": 1
+    },
+    "caused": {
+      "wants_shots": 1,
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
+    },
+    "down": {
+      "wants_shots": 1,
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
+    },
+    "time": {
+      "wants_shots": 1,
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
+    },
+    "changed": {
+      "wants_shots": 1,
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
+    },
+    "helped": {
+      "wants_shots": 1,
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
+    },
+    "distance": {
+      "wants_shots": 1,
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
+    },
+    "highline": {
+      "wants_shots": 1,
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
+    },
+    "average": {
+      "wants_shots": 1,
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
+    },
+    "during": {
+      "wants_shots": 1,
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
+    },
+    "whole": {
+      "wants_shots": 1,
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
+    },
+    "much": {
+      "wants_shots": 1,
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
+    },
+    "maintain": {
+      "wants_shots": 1,
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
+    },
+    "heatmaps": {
+      "wants_heatmap": 1,
+      "wants_passes": 1
+    },
+    "successful": {
+      "wants_heatmap": 1,
+      "wants_passes": 1
+    },
+    "unsuccessful": {
+      "wants_heatmap": 1,
+      "wants_passes": 1
+    },
+    "midfielders": {
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
+    },
+    "kept": {
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
+    },
+    "amongst": {
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
+    },
+    "each": {
+      "wants_defensive_line": 1,
+      "wants_team_shape": 1
+    },
+    "simple": {
+      "wants_heatmap": 1,
+      "wants_dribbles": 1,
+      "wants_passes": 1,
+      "wants_shots": 1
+    },
+    "brief": {
+      "wants_heatmap": 1,
+      "wants_dribbles": 1,
+      "wants_passes": 1,
+      "wants_shots": 1
+    },
+    "lamine": {
+      "wants_heatmap": 2,
+      "wants_dribbles": 3,
+      "wants_passes": 3,
+      "wants_shots": 3,
+      "wants_1v1_duels": 2
+    },
+    "yamal": {
+      "wants_heatmap": 2,
+      "wants_dribbles": 3,
+      "wants_passes": 3,
+      "wants_shots": 3,
+      "wants_1v1_duels": 2
+    },
+    "once": {
+      "wants_heatmap": 1,
+      "wants_dribbles": 1,
+      "wants_passes": 1,
+      "wants_shots": 1
+    },
+    "came": {
+      "wants_heatmap": 1,
+      "wants_dribbles": 1,
+      "wants_passes": 1,
+      "wants_shots": 1
+    },
+    "mihailo": {
+      "wants_heatmap": 1,
+      "wants_dribbles": 1,
+      "wants_passes": 1,
+      "wants_shots": 1,
+      "wants_1v1_duels": 2
+    },
+    "ristic": {
+      "wants_heatmap": 1,
+      "wants_dribbles": 1,
+      "wants_passes": 1,
+      "wants_shots": 1,
+      "wants_1v1_duels": 2
     }
   },
   "learned_preferences": [
     "Prioritize non-standard coaching metrics: pass providers on runs, overlap timing, primary markers, and sub-optimal shot audits."
   ],
   "recent_insights": [
+    {
+      "timestamp": "2026-10-26 01:05:15",
+      "question": "Analyze Lamine Yamal 1v1 duels against Mihailo Ristic",
+      "intents": [
+        "wants_1v1_duels"
+      ],
+      "players": [
+        "Lamine Yamal",
+        "Mihailo Risti\u0107"
+      ],
+      "scope": "full_match",
+      "summary": "Strict On-Ball 1v1 Duels (Yamal with the Ball vs #21 Mihailo Risti\u0107): When Yamal was the active ball carrier, he engaged #21 Mihailo Risti\u0107 in 16 direct on-ball 1v1 duels \u2014 Yamal beat/progressed past Risti\u0107 towards goal in 1 (6.2%), Risti\u0107 won the ball back for his team in 3 (18.8%), and Risti\u0107 contained Yamal forcing a backward/sideways recycle in 12 (75.0%). (Peak speed: Yamal 28.1 km/h vs Risti\u0107 28.3 km/h; 1v1 duel avg speed: 16.7 vs 19.3 km/h)."
+    },
+    {
+      "timestamp": "2026-10-26 01:05:06",
+      "question": "Analyze Lamine Yamal 1v1 duels against Mihailo Ristic",
+      "intents": [
+        "wants_1v1_duels"
+      ],
+      "players": [
+        "Lamine Yamal",
+        "Mihailo Risti\u0107"
+      ],
+      "scope": "full_match",
+      "summary": "Strict On-Ball 1v1 Duels (Yamal with the Ball vs #21 Mihailo Risti\u0107): When Yamal was the active ball carrier, he engaged #21 Mihailo Risti\u0107 in 16 direct on-ball 1v1 duels \u2014 Yamal beat/progressed past Risti\u0107 towards goal in 1 (6.2%), Risti\u0107 won the ball back for his team in 3 (18.8%), and Risti\u0107 contained Yamal forcing a backward/sideways recycle in 12 (75.0%). (Peak speed: Yamal 28.1 km/h vs Risti\u0107 28.3 km/h; 1v1 duel avg speed: 16.7 vs 19.3 km/h)."
+    },
+    {
+      "timestamp": "2026-10-26 01:04:42",
+      "question": "Analyze Lamine Yamal 1v1 duels against Mihailo Ristic",
+      "intents": [
+        "wants_heatmap",
+        "wants_dribbles",
+        "wants_passes",
+        "wants_shots"
+      ],
+      "players": [
+        "Lamine Yamal"
+      ],
+      "scope": "full_match",
+      "summary": "On-Ball Passes & Dribbles (#27 Lamine Yamal): Completed 12 of 16 passes (75.0% accuracy), including 2 progressive passes, 4/5 switches of play (3/3 long-ball wing switches), 3/3 long balls (>=25m), 1/4 crosses, and 0 key passes (top receivers: #9 Lewandowski (6), #23 Kound\u00e9 (1), #15 Christensen (1)). In 1v1 situations against defenders, Yamal engaged in 1 direct take-ons, successfully getting past his man towards the opponent goal in 0 (0.0%), alongside 10 open-field carries (2 progressive, covering 48.0m total)."
+    },
+    {
+      "timestamp": "2026-10-26 01:04:29",
+      "question": "What shots, passes, and dribbles did Lamine Yamal make against Celta Vigo?",
+      "intents": [
+        "wants_dribbles",
+        "wants_passes",
+        "wants_shots"
+      ],
+      "players": [
+        "Lamine Yamal"
+      ],
+      "scope": "full_match",
+      "summary": "On-Ball Passes & Dribbles (#27 Lamine Yamal): Completed 11 of 12 passes (91.7% accuracy), including 2 progressive passes, 0/0 switches of play (0/0 long-ball wing switches), 0/0 long balls (>=25m), 0/0 crosses, and 0 key passes (top receivers: #2 Cancelo (3), #4 Ara\u00fajo (3), #11 Raphinha (3)). In 1v1 situations against defenders, Yamal engaged in 4 direct take-ons, successfully getting past his man towards the opponent goal in 0 (0.0%), alongside 12 open-field carries (3 progressive, covering 84.8m total)."
+    },
+    {
+      "timestamp": "2026-10-26 00:50:41",
+      "question": "Give me a simple brief on how lamine yamal played once he came on",
+      "intents": [
+        "wants_heatmap",
+        "wants_dribbles",
+        "wants_passes",
+        "wants_shots"
+      ],
+      "players": [
+        "Lamine Yamal"
+      ],
+      "scope": "full_match",
+      "summary": "On-Ball Passes & Dribbles (#27 Lamine Yamal): Completed 12 of 16 passes (75.0% accuracy), including 2 progressive passes, 4/5 switches of play (3/3 long-ball wing switches), 3/3 long balls (>=25m), 1/4 crosses, and 0 key passes (top receivers: #9 Lewandowski (6), #23 Kound\u00e9 (1), #15 Christensen (1)). On the ball, Yamal executed 11 ball carries/dribbles, succeeding in 11 (100.0%) with 2 progressive carries covering 48.0m."
+    },
+    {
+      "timestamp": "2026-10-26 00:48:43",
+      "question": "Analyze the shape the midfielders kept amongst each other ",
+      "intents": [
+        "wants_defensive_line",
+        "wants_team_shape"
+      ],
+      "players": [
+        "Joshua Kimmich",
+        "Leon Goretzka",
+        "Thomas M\u00fcller",
+        "Jamal Musiala",
+        "Bruno Fernandes",
+        "Christian Eriksen",
+        "Casemiro",
+        "Scott McTominay",
+        "Hannibal Mejbri"
+      ],
+      "scope": "full_match",
+      "summary": "Strict On-Ball 1v1 Duels (Kimmich with the Ball vs #8 Bruno Fernandes): When Kimmich was the active ball carrier, he engaged #8 Bruno Fernandes in 27 direct on-ball 1v1 duels \u2014 recording 18 successes (66.7% where Kimmich beat/progressed past Fernandes on the ball) and 9 failures (33.3% where Fernandes contained him, forced a backward recycle, or won a turnover). (Peak speed: Kimmich 32.6 km/h vs Fernandes 35.1 km/h; 1v1 duel avg speed: 15.8 vs 19.1 km/h)."
+    },
+    {
+      "timestamp": "2026-10-26 00:47:20",
+      "question": "Give me 2 heatmaps, one of gavi's successful passes and one of his unsuccessful passes",
+      "intents": [
+        "wants_heatmap",
+        "wants_passes"
+      ],
+      "players": [
+        "Gavi"
+      ],
+      "scope": "full_match",
+      "summary": "On-Ball Passes & Dribbles (#6 Gavi): Completed 65 of 69 passes (94.2% accuracy), including 11 progressive passes, 12/13 switches of play (8/9 long-ball wing switches), 8/10 long balls (>=25m), 2/2 crosses, and 5 key passes (top receivers: #23 Kound\u00e9 (14), #22 G\u00fcndo\u011fan (13), #2 Cancelo (11)). On the ball, Gavi executed 63 ball carries/dribbles, succeeding in 63 (100.0%) with 13 progressive carries covering 279.6m."
+    },
+    {
+      "timestamp": "2026-10-26 00:46:41",
+      "question": "How much possession did we maintain",
+      "intents": [
+        "wants_shots",
+        "wants_defensive_line",
+        "wants_team_shape"
+      ],
+      "players": [],
+      "scope": "full_match",
+      "summary": "FC Barcelona \u2014 Dominant Shape: High Pressing Block (Aggressive Frontline) (67.3% of match phases). Operates predominantly in a High Pressing Block (Aggressive Frontline) (67.3% of phases). Backline anchors at an average of 53.3m from own goal, maintaining a tight 5.0m separation to the midfield unit and an overall vertical block depth of 17.3m."
+    },
+    {
+      "timestamp": "2026-10-26 00:46:23",
+      "question": "What was the distance of the highline on average during the whole game",
+      "intents": [
+        "wants_shots",
+        "wants_defensive_line",
+        "wants_team_shape"
+      ],
+      "players": [],
+      "scope": "full_match",
+      "summary": "FC Barcelona \u2014 Dominant Shape: High Pressing Block (Aggressive Frontline) (67.3% of match phases). Operates predominantly in a High Pressing Block (Aggressive Frontline) (67.3% of phases). Backline anchors at an average of 53.3m from own goal, maintaining a tight 5.0m separation to the midfield unit and an overall vertical block depth of 17.3m."
+    },
+    {
+      "timestamp": "2026-10-26 00:45:11",
+      "question": "What caused us to be down 2-0 for a long time and what changed which helped us win the game",
+      "intents": [
+        "wants_shots",
+        "wants_defensive_line",
+        "wants_team_shape"
+      ],
+      "players": [],
+      "scope": "full_match",
+      "summary": "FC Barcelona \u2014 Dominant Shape: High Pressing Block (Aggressive Frontline) (67.3% of match phases). Operates predominantly in a High Pressing Block (Aggressive Frontline) (67.3% of phases). Backline anchors at an average of 53.3m from own goal, maintaining a tight 5.0m separation to the midfield unit and an overall vertical block depth of 17.3m."
+    },
+    {
+      "timestamp": "2026-10-26 00:43:50",
+      "question": "How was our backline shaped when our team was the one with possession of the ball",
+      "intents": [
+        "wants_defensive_line",
+        "wants_team_shape"
+      ],
+      "players": [],
+      "scope": "full_match",
+      "summary": "FC Barcelona \u2014 Dominant Shape: High Pressing Block (Aggressive Frontline) (67.3% of match phases). Operates predominantly in a High Pressing Block (Aggressive Frontline) (67.3% of phases). Backline anchors at an average of 53.3m from own goal, maintaining a tight 5.0m separation to the midfield unit and an overall vertical block depth of 17.3m."
+    },
+    {
+      "timestamp": "2026-10-26 00:43:18",
+      "question": "How was our backline shaped up when the possession of the ball was with our team?",
+      "intents": [
+        "wants_defensive_line",
+        "wants_team_shape"
+      ],
+      "players": [
+        "Gavi"
+      ],
+      "scope": "full_match",
+      "summary": "FC Barcelona \u2014 Dominant Shape: High Pressing Block (Aggressive Frontline) (67.3% of match phases). Operates predominantly in a High Pressing Block (Aggressive Frontline) (67.3% of phases). Backline anchors at an average of 53.3m from own goal, maintaining a tight 5.0m separation to the midfield unit and an overall vertical block depth of 17.3m."
+    },
     {
       "timestamp": "2026-10-26 00:39:29",
       "question": "What was the negative part of the first half for us",
@@ -1674,157 +2060,6 @@
       ],
       "scope": "full_match",
       "summary": "On-Ball Passes & Dribbles (#7 Kylian Mbapp\u00e9): Completed 38 of 45 passes (84.4% accuracy), including 9 progressive passes, 8/9 switches of play (6/6 long-ball wing switches), 4/4 long balls (>=25m), 4/6 crosses, and 3 key passes (top receivers: #10 Demb\u00e9l\u00e9 (8), #33 Za\u00efre-Emery (6), #21 Hern\u00e1ndez (6)). On the ball, Mbapp\u00e9 executed 32 ball carries/dribbles, succeeding in 31 (96.9%) with 6 progressive carries covering 145.0m."
-    },
-    {
-      "timestamp": "2026-10-25 13:47:43",
-      "question": "passes Kane received",
-      "intents": [
-        "wants_passes",
-        "wants_who_passed_most",
-        "wants_passes_received"
-      ],
-      "players": [
-        "Harry Kane"
-      ],
-      "scope": "full_match",
-      "summary": "Top Pass Supplier to #9 Harry Kane: #2 Dayot Upamecano passed to Kane the most across Full 90-Minute Match (H1 + H2), completing 7 passes to him (7 progressive, 108.1m total passing distance), followed by #10 San\u00e9 (4 passes), #27 Laimer (4 passes), #3 Min-jae (3 passes). In aggregate, Kane received 27 passes from 8 different teammates."
-    },
-    {
-      "timestamp": "2026-10-25 13:47:08",
-      "question": "Kane and Musiala passes received",
-      "intents": [
-        "wants_passes",
-        "is_teammate_query",
-        "wants_teammates_pass_combo",
-        "wants_who_passed_most",
-        "wants_passes_received"
-      ],
-      "players": [
-        "Harry Kane",
-        "Jamal Musiala"
-      ],
-      "scope": "full_match",
-      "summary": "Passes Received (Kane from Musiala): #9 Harry Kane received 3 completed passes from #42 Jamal Musiala across Full 90-Minute Match (H1 + H2): 09:15 [H1] (17.1m \u2014 Link-Up Pass); 41:13 [H1] (14.8m \u2014 Link-Up Pass); 62:37 [H2] (12.5m \u2014 Progressive Pass, Key Pass (Key Pass leading to shot)). Musiala attempted 23 total passes in the match (20 completed, 87.0% accuracy), with 3 direct deliveries targeting Kane (15.0% of his completed passes)."
-    },
-    {
-      "timestamp": "2026-10-25 13:38:27",
-      "question": "Kane and Musiala passes received",
-      "intents": [
-        "wants_passes",
-        "is_teammate_query",
-        "wants_teammates_pass_combo"
-      ],
-      "players": [
-        "Harry Kane",
-        "Jamal Musiala"
-      ],
-      "scope": "full_match",
-      "summary": "Passes Received (Kane from Musiala): #9 Harry Kane received 3 completed passes from #42 Jamal Musiala across Full 90-Minute Match (H1 + H2): 09:15 [H1] (17.1m \u2014 Link-Up Pass); 41:13 [H1] (14.8m \u2014 Link-Up Pass); 62:37 [H2] (12.5m \u2014 Progressive Pass, Key Pass (Key Pass leading to shot)). Musiala attempted 23 total passes in the match (20 completed, 87.0% accuracy), with 3 direct deliveries targeting Kane (15.0% of his completed passes)."
-    },
-    {
-      "timestamp": "2026-10-25 13:38:10",
-      "question": "Kane and Musiala passes received",
-      "intents": [
-        "wants_passes"
-      ],
-      "players": [],
-      "scope": "full_match",
-      "summary": "Match Tactical Analysis \u2014 Full 90-Minute Match (H1 + H2)"
-    },
-    {
-      "timestamp": "2026-10-25 13:37:52",
-      "question": "Kane and Musiala passes received",
-      "intents": [
-        "wants_passes"
-      ],
-      "players": [],
-      "scope": "full_match",
-      "summary": "Match Tactical Analysis \u2014 Full 90-Minute Match (H1 + H2)"
-    },
-    {
-      "timestamp": "2026-10-25 13:29:12",
-      "question": "Mbappe dribbles vs Trippier",
-      "intents": [
-        "wants_1v1_duels",
-        "wants_dribbles"
-      ],
-      "players": [
-        "Kylian Mbapp\u00e9",
-        "Kieran Trippier"
-      ],
-      "scope": "full_match",
-      "summary": "On-Ball Passes & Dribbles (#7 Kylian Mbapp\u00e9): Completed 38 of 45 passes (84.4% accuracy), including 9 progressive passes, 8/9 switches of play (6/6 long-ball wing switches), 4/4 long balls (>=25m), 4/6 crosses, and 3 key passes (top receivers: #10 Demb\u00e9l\u00e9 (8), #33 Za\u00efre-Emery (6), #21 Hern\u00e1ndez (6)). On the ball, Mbapp\u00e9 executed 32 ball carries/dribbles, succeeding in 31 (96.9%) with 6 progressive carries covering 145.0m."
-    },
-    {
-      "timestamp": "2026-10-25 13:18:47",
-      "question": "Mbappe's shot map",
-      "intents": [
-        "wants_shots"
-      ],
-      "players": [
-        "Kylian Mbapp\u00e9"
-      ],
-      "scope": "full_match",
-      "summary": "Shot Map & Decision Audit (#7 Kylian Mbapp\u00e9): Mbapp\u00e9 registered 8 shot / penalty-box strike actions \u2014 4 Optimal Shots (best available option / clear lane) and 4 Non-Optimal Shots (50.0% decision efficiency). Key non-optimal moments: 26:00 (H1) where #37 \u0160kriniar was open at 16.1m; 91:52 (H2) where #17 Vitinha was open at 25.2m; 95:43 (H2) where #9 Ramos was open at 11.2m."
-    },
-    {
-      "timestamp": "2026-10-25 12:47:52",
-      "question": "Analyze why our backline is vulnerable and suggest in-game tactical adjustments",
-      "intents": [
-        "wants_defensive_line",
-        "wants_team_shape"
-      ],
-      "players": [],
-      "scope": "full_match",
-      "summary": "Bayern Munich \u2014 Dominant Shape: High Pressing Block (Aggressive Frontline) (40.8% of match phases). Operates predominantly in a High Pressing Block (Aggressive Frontline) (40.8% of phases). Backline anchors at an average of 43.2m from own goal, maintaining a tight 10.3m separation to the midfield unit and an overall vertical block depth of 18.8m."
-    },
-    {
-      "timestamp": "2026-10-25 12:47:12",
-      "question": "Mbappe dribbles vs Trippier",
-      "intents": [
-        "wants_1v1_duels",
-        "wants_dribbles"
-      ],
-      "players": [
-        "Kylian Mbapp\u00e9",
-        "Kieran Trippier"
-      ],
-      "scope": "full_match",
-      "summary": "On-Ball Passes & Dribbles (#7 Kylian Mbapp\u00e9): Completed 38 of 45 passes (84.4% accuracy), including 9 progressive passes, 8/9 switches of play (6/6 long-ball wing switches), 4/4 long balls (>=25m), 4/6 crosses, and 3 key passes (top receivers: #10 Demb\u00e9l\u00e9 (8), #33 Za\u00efre-Emery (6), #21 Hern\u00e1ndez (6)). On the ball, Mbapp\u00e9 executed 32 ball carries/dribbles, succeeding in 31 (96.9%) with 6 progressive carries covering 145.0m."
-    },
-    {
-      "timestamp": "2026-10-24 12:00:36",
-      "question": "find me harry kane's shots",
-      "intents": [
-        "wants_shots"
-      ],
-      "players": [
-        "Harry Kane"
-      ],
-      "scope": "full_match",
-      "summary": "Shot Map & Decision Audit (#9 Harry Kane): Kane registered 7 shot / penalty-box strike actions \u2014 4 Optimal Shots (best available option / clear lane) and 3 Non-Optimal Shots (57.1% decision efficiency). Key non-optimal moments: 62:38 (H2) where #7 Gnabry was open at 18.5m; 68:52 (H2) where #10 San\u00e9 was open at 24.2m; 78:42 (H2) where #19 Davies was open at 24.1m."
-    },
-    {
-      "timestamp": "2026-10-24 12:00:19",
-      "question": "kane",
-      "intents": [
-        "wants_shots",
-        "wants_defensive_line",
-        "wants_team_shape"
-      ],
-      "players": [],
-      "scope": "full_match",
-      "summary": "Newcastle United \u2014 Dominant Shape: High Pressing Block (Aggressive Frontline) (36.9% of match phases). Operates predominantly in a High Pressing Block (Aggressive Frontline) (36.9% of phases). Backline anchors at an average of 42.2m from own goal, maintaining a tight 10.8m separation to the midfield unit and an overall vertical block depth of 18.8m."
-    },
-    {
-      "timestamp": "2026-10-24 11:59:51",
-      "question": "find me harry kane's shots",
-      "intents": [
-        "wants_shots"
-      ],
-      "players": [],
-      "scope": "full_match",
-      "summary": "Match Shot Decision Audit: 19 shots analyzed \u2014 9 Optimal Shots and 10 Non-Optimal Shots."
     }
   ],
   "team_shapes_ontology": {
